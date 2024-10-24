@@ -115,7 +115,11 @@ const userStore = (set, get) => ({
     set({ isLoading: true });
     try {
       const response = await getAllUserService();
-      set({ allUser: response.data, isLoading: false });
+      const sortedData = response?.data?.sort((a, b) => {
+        return a.nim.localeCompare(b.nim);
+      });
+
+      set({ allUser: sortedData, isLoading: false });
       return true;
     } catch (error) {
       get().handleApiError(error);
