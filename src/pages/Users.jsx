@@ -1,12 +1,13 @@
 import { FaUserPlus } from 'react-icons/fa';
 import { IoIosSearch } from 'react-icons/io';
-import { ModalUser, TableUser } from '../components';
+import { ModalUser, TableUsers } from '../components';
 import useUserStore from '../features/userStore';
 import { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { tableHeaderUser } from '../utils/constants';
 
 function Users() {
-  const { modalUser, role, setModalUser, getAllUser } = useUserStore((state) => state);
+  const { modalUser, role, allUser, setModalUser, getAllUser } = useUserStore((state) => state);
 
   const handleSetModal = (data) => {
     setModalUser(data);
@@ -24,7 +25,7 @@ function Users() {
     <section>
       {modalUser && <ModalUser />}
 
-      <div className="relative overflow-x-auto  sm:rounded-lg">
+      <div className="relative   sm:rounded-lg">
         <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 ">
           <div>
             <button
@@ -37,7 +38,7 @@ function Users() {
               <FaUserPlus className="w-4 h-4 ms-2.5" />
             </button>
             <select
-              className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 ms-5"
+              className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 mt-3 lg:mt-0 ms-5"
               onChange={(e) => console.log(e.target.value)}
             >
               <option value="ascending-number">No (asc)</option>
@@ -56,13 +57,13 @@ function Users() {
             <input
               type="text"
               id="table-search-users"
-              className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-gray-500 focus:border-gray-500 focus:outline-none"
+              className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-gray-500 focus:border-gray-500 focus:outline-none w-full"
               placeholder="Search for NIM / NIP"
             />
           </div>
         </div>
 
-        <TableUser />
+        <TableUsers data={allUser} role={role} tableHeader={tableHeaderUser} />
       </div>
     </section>
   );

@@ -1,16 +1,15 @@
 import { Link, useParams } from 'react-router-dom';
 import { FaLongArrowAltRight } from 'react-icons/fa';
-import { useEffect } from 'react';
 
 import useGroupStore from '../features/groupStore';
 import { MdGroups } from 'react-icons/md';
 
 function TableGroup() {
   const { allGroup } = useGroupStore((state) => state);
-
   const { id: idActivity } = useParams();
 
-  if (allGroup.length === 0) {
+  //! Check if there's no data to display
+  if (!allGroup || allGroup.length === 0) {
     return <h1 className="text-lg text-primary">Belum Ada Grup Yang Mengikuti Kegiatan.</h1>;
   }
 
@@ -24,16 +23,16 @@ function TableGroup() {
               <MdGroups />
               {activity?.nama_grup}
             </h5>
+
             <p className="mb-3 text-slate-800/70 font-light">
-              {' '}
-              Jumlah mahasiswa terdaftar : <span className="font-semibold text-slate-800"> {activity?.mahasiswa.length}</span>
+              Jumlah mahasiswa terdaftar : <span className="font-semibold text-slate-800"> {activity?.mahasiswa?.length}</span>
             </p>
 
             {/* Bottom Section */}
             <div className="flex items-center justify-between mt-auto">
               {/* Link */}
               <Link
-                to={`/kegiatan/${idActivity}/group/${activity?.id}`}
+                to={`/kegiatan/${idActivity}/grup/${activity?.id}`}
                 className="inline-flex items-center px-4 py-2 text-xs lg:text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
               >
                 Lihat Grup

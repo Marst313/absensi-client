@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Activity, Dashboard, Error, HomeLayout, Login, Profile, ProtectedRoutes, SingleActivity, SingleGroup, Users } from './pages';
+import { Activity, Dashboard, Error, GroupsPageUser, HomeLayout, Login, Profile, ProtectedRoutes, SingleActivity, SingleGroupAdmin, SingleGroupUser, Users } from './pages';
 
 const router = createBrowserRouter([
   {
@@ -21,15 +21,31 @@ const router = createBrowserRouter([
       },
       {
         path: '/kegiatan',
-        element: <Activity />,
+        element: (
+          <ProtectedRoutes>
+            <Activity />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: '/kegiatan/:id',
         element: <SingleActivity />,
       },
       {
-        path: 'kegiatan/:idActivity/group/:idGroup',
-        element: <SingleGroup />,
+        path: '/grup',
+        element: <GroupsPageUser />,
+      },
+      {
+        path: '/grup/:idGroup',
+        element: <SingleGroupUser />,
+      },
+      {
+        path: 'kegiatan/:idActivity/grup/:idGroup',
+        element: (
+          <ProtectedRoutes>
+            <SingleGroupAdmin />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: '/profil',

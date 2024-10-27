@@ -25,6 +25,7 @@ const userStore = (set, get) => ({
   modalUser: false,
   modalProfile: false,
 
+  Groups: [],
   allUser: [],
 
   // ! MODAL MANAGEMENT
@@ -33,8 +34,9 @@ const userStore = (set, get) => ({
 
   // ! SET USER DATA TO STATE
   setUserData: (response) => {
-    const { token, email, isLogin, role, nim, id, avatar, name } = response?.data;
-    set({ token, email, isLogin, role, nim, id, avatar, name, isLoading: false });
+    const { token, email, isLogin, role, nim, id, avatar, name, Group = [] } = response?.data;
+
+    set({ token, email, isLogin, role, nim, id, avatar, name, Groups: Group, isLoading: false });
   },
 
   // ! HANDLE ERROR ON API
@@ -54,6 +56,7 @@ const userStore = (set, get) => ({
     set({ isLoading: true });
     try {
       const response = await validateToken(jwt);
+
       get().setUserData(response);
       return true;
     } catch (error) {

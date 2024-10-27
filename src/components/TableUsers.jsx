@@ -1,10 +1,4 @@
-import useUserStore from '../features/userStore';
-import { tableHeaderUser } from '../utils/constants';
-import defaultProfile from '../assets/images/defaultProfile.jpg';
-
-function TableUser() {
-  const { allUser } = useUserStore((state) => state);
-
+function TableUsers({ data, tableHeader, role }) {
   // ! EDIT BUTTON USER
   const handleEditUser = (id) => {
     console.log(id);
@@ -15,8 +9,8 @@ function TableUser() {
     console.log(id);
   };
 
-  if (allUser.length === 0) {
-    return <h1 className="text-lg text-primary">Belum Ada Mahasiswa.</h1>;
+  if (!data) {
+    return <h1 className="mt-3 text-lg font-semibold text-red-500">Data tidak ditemukan</h1>;
   }
 
   return (
@@ -24,7 +18,7 @@ function TableUser() {
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
         <thead className="text-xs text-gray-700 uppercase bg-slate-300 ">
           <tr>
-            {tableHeaderUser.map((name, index) => {
+            {tableHeader?.map((name, index) => {
               if (name.type === 'Checkbox') {
                 return (
                   <th scope="col" className="p-4" key={index}>
@@ -47,7 +41,7 @@ function TableUser() {
           </tr>
         </thead>
         <tbody>
-          {allUser?.map((user, index) => {
+          {data?.map((user, index) => {
             return (
               <tr key={index} className="bg-white border-b hover:bg-gray-50">
                 <td className="w-4 p-4">
@@ -70,15 +64,23 @@ function TableUser() {
                 <td className="px-6 py-4">{user.nim || '-'}</td>
                 <td className="px-6 py-4">{user.role || '-'}</td>
 
-                <td className="px-6 py-4">
-                  <button type="button" onClick={() => handleEditUser(user.id)} className="font-medium text-blue-600 hover:underline">
-                    Edit
-                  </button>
+                {role === 'MHS' ? (
+                  <td className="px-6 py-4">
+                    <button type="button" disabled className="font-medium text-blue-600 hover:underline">
+                      -
+                    </button>
+                  </td>
+                ) : (
+                  <td className="px-3 py-4">
+                    <button type="button" onClick={() => handleEditUser(user.id)} className="font-medium text-blue-600 hover:underline">
+                      Edit
+                    </button>
 
-                  <button type="button" onClick={() => handleDeleteUser(user.id)} className="font-medium text-red-600 hover:underline ms-5">
-                    Delete
-                  </button>
-                </td>
+                    <button type="button" onClick={() => handleDeleteUser(user.id)} className="font-medium text-red-600 hover:underline ms-5">
+                      Delete
+                    </button>
+                  </td>
+                )}
               </tr>
             );
           })}
@@ -87,4 +89,4 @@ function TableUser() {
     </div>
   );
 }
-export default TableUser;
+export default TableUsers;

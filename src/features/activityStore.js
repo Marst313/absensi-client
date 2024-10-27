@@ -45,6 +45,7 @@ const activityStore = (set, get) => ({
     set({ isLoading: true });
 
     try {
+      console.log(data);
       const response = await createNewActivity(data);
 
       set({ modalActivity: false, isLoading: false });
@@ -52,6 +53,7 @@ const activityStore = (set, get) => ({
 
       return true;
     } catch (error) {
+      console.log(error);
       get().handleApiError(error);
       set({ isLoading: false });
       return false;

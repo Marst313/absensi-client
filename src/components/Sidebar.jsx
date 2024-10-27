@@ -3,14 +3,14 @@ import { useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import useUserStore from '../features/userStore';
-import { menuItems } from '../utils/constants';
+import { menuItemsAdmin, menuItemsUser } from '../utils/constants';
 
 function Sidebar({ openSidebar, setSidebar }) {
   const { avatar, role, id, name, logout } = useUserStore((state) => state);
   const sidebarRef = useRef(null);
   const navigate = useNavigate();
 
-  const filteredMenu = role === 'MHS' ? menuItems.filter((item) => item.name !== 'Mahasiswa') : menuItems;
+  const filteredMenu = role === 'MHS' ? menuItemsUser : menuItemsAdmin;
 
   const handleLogout = async () => {
     const response = await logout(id);

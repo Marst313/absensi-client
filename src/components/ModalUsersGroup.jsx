@@ -6,7 +6,7 @@ import useUserStore from '../features/userStore';
 
 function ModalUsersGroup() {
   const [newUsers, setNewUsers] = useState({ listUsers: '' });
-  const { modalGroupUsers, isLoading, setModalGroupUsers, getAllGroup, connectUserToGroup, setSingleGroup } = useGroupStore((state) => state);
+  const { modalGroupUsers, isLoading, allGroup, setModalGroupUsers, getAllGroup, connectUserToGroup, setSingleGroup } = useGroupStore((state) => state);
 
   const { allUser } = useUserStore((state) => state);
 
@@ -23,7 +23,7 @@ function ModalUsersGroup() {
 
     await connectUserToGroup({ idGroup, idUser: newUsers.listUsers });
     await getAllGroup(idActivity);
-    setSingleGroup(idGroup);
+    setSingleGroup(idGroup, allGroup);
 
     setNewUsers({ listUsers: '' });
   };

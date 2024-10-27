@@ -2,24 +2,24 @@ import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 
-import useGroupStore from '../features/groupStore';
-import useUserStore from '../features/userStore';
-import { Loading, ModalUsersGroup, TableUserGroup } from '../components';
+import { Loading, ModalUsersGroup, TableUsersGroup } from '../../components';
+import useUserStore from '../../features/userStore';
+import useGroupStore from '../../features/groupStore';
 
 function useSingleGroup(idActivity, idGroup) {
   const { getAllUser } = useUserStore((state) => state);
-  const { singleGroup, isLoading, getAllGroup, setSingleGroup, clearSingleGroup } = useGroupStore((state) => state);
+  const { singleGroup, isLoading, allGroup, getAllGroup, setSingleGroup, clearSingleGroup } = useGroupStore((state) => state);
 
   useEffect(() => {
     const fetchData = async () => {
       clearSingleGroup();
       await getAllGroup(idActivity);
       await getAllUser();
-      setSingleGroup(idGroup);
+      setSingleGroup(idGroup, allGroup);
     };
 
     fetchData();
-  }, [idActivity, idGroup, getAllUser, getAllGroup, setSingleGroup]);
+  }, [idActivity, idGroup]);
 
   return { singleGroup, isLoading };
 }
@@ -33,7 +33,7 @@ function SingleGroup() {
     setModalGroupUsers(true);
   };
 
-  if (isLoading || !singleGroup) {
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -58,13 +58,13 @@ function SingleGroup() {
       {/* Content */}
       <div>
         <div className="flex items-center flex-col lg:flex-row gap-5 relative">
-          <h1 className="font-semibold text-2xl text-center capitalize">{singleGroup.nama_grup}</h1>
+          <h1 className="font-semibold text-2xl text-center capitalize">{singleGroup?.nama_grup}</h1>
         </div>
 
         <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700" />
 
         <h1 className="font-semibold text-lg my-3">Table Mahasiswa Yang Mengikuti Kegiatan</h1>
-        <TableUserGroup />
+        <TableUsersGroup />
       </div>
     </div>
   );

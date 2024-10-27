@@ -3,11 +3,11 @@ import { IoArrowBack } from 'react-icons/io5';
 import { useEffect } from 'react';
 import { BsFillCalendarDateFill } from 'react-icons/bs';
 
-import useUserStore from '../features/userStore';
-import { isoToDate } from '../utils/helper';
-import useGroupStore from '../features/groupStore';
-import useActivityStore from '../features/activityStore';
-import { LoadingSkeleton, ModalNewGroup, TableGroup } from '../components';
+import useUserStore from '../../features/userStore';
+import { isoToDate } from '../../utils/helper';
+import useGroupStore from '../../features/groupStore';
+import useActivityStore from '../../features/activityStore';
+import { LoadingSkeleton, ModalNewGroup, TableGroupAdmin } from '../../components';
 
 function SingleActivity() {
   const { allActivity, singleActivity, isLoading, getAllActivity, setSingleActivity } = useActivityStore((state) => state);
@@ -91,7 +91,7 @@ function SingleActivity() {
         <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700" />
 
         <h1 className="font-semibold text-lg my-3 underline italic">List Grup Yang Mengikuti Kegiatan</h1>
-        <TableGroup />
+        <TableGroupAdmin />
       </div>
     </div>
   );

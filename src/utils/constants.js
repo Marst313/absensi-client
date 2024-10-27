@@ -1,9 +1,14 @@
 import { RiDashboardFill, RiUser3Fill, RiBarChart2Fill } from 'react-icons/ri';
 
-export const menuItems = [
+export const menuItemsAdmin = [
   { name: 'Dashboard', icon: RiDashboardFill, to: '/' },
   { name: 'Kegiatan', icon: RiBarChart2Fill, to: '/kegiatan' },
   { name: 'Mahasiswa', icon: RiUser3Fill, to: '/mahasiswa' },
+];
+
+export const menuItemsUser = [
+  { name: 'Dashboard', icon: RiDashboardFill, to: '/' },
+  { name: 'Group', icon: RiBarChart2Fill, to: '/grup' },
 ];
 
 export const tableHeaderUser = [

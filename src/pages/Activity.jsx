@@ -5,6 +5,7 @@ import { TableActivity, ModalActivity, LoadingSkeleton } from '../components';
 import useActivityStore from '../features/activityStore';
 import { useEffect } from 'react';
 import useUserStore from '../features/userStore';
+import { Navigate } from 'react-router-dom';
 
 function Activity() {
   const { modalActivity, isLoading, setModalActivity, getAllActivity } = useActivityStore((state) => state);

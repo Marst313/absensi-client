@@ -1,9 +1,9 @@
 export { default as Sidebar } from './Sidebar';
 
-export { default as TableActivity } from './TableActivity';
-export { default as TableUser } from './TableUser';
-export { default as TableUserGroup } from './TableUsersGroup';
-export { default as TableGroup } from './TableGroup';
+export { default as TableActivity } from './TableActivityAdmin';
+export { default as TableUsers } from './TableUsers';
+export { default as TableUsersGroup } from './TableUsersGroup';
+export { default as TableGroupAdmin } from './TableGroupAdmin';
 
 export { default as ModalUser } from './ModalUser';
 export { default as ModalUsersGroup } from './ModalUsersGroup';

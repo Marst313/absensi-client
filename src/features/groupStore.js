@@ -30,9 +30,9 @@ const groupStore = (set, get) => ({
   },
 
   // ! SET SINGLE GROUP
-  setSingleGroup: (idGroup) => {
+  setSingleGroup: (idGroup, allGroup) => {
     set({ isLoading: true });
-    const currentGroup = get().allGroup.find((group) => group.id === idGroup);
+    const currentGroup = allGroup.find((group) => group.id === idGroup);
     set({ singleGroup: currentGroup, isLoading: false });
   },
   clearSingleGroup: () => set({ singleGroup: {} }),

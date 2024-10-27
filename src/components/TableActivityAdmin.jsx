@@ -22,7 +22,7 @@ function TableActivity() {
           </h5>
 
           {/* Description */}
-          <p className="mb-6 text-sm text-gray-700 flex-grow">{activity.deskripsi}</p>
+          <p className="mb-6 text-sm text-gray-700 flex-grow line-clamp-4">{activity.deskripsi}</p>
 
           {/* Bottom Section */}
           <div className="flex items-center justify-between mt-auto">

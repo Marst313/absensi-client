@@ -46,7 +46,7 @@ function Login() {
   }, [token, validateToken, navigate]);
 
   return (
-    <section className="h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
+    <section className="h-screen flex items-center justify-center bg-gradient-to-r p-4 from-blue-500 to-purple-600">
       <form className="w-full max-w-sm p-8 bg-white shadow-lg rounded-xl" onSubmit={handleSubmitLogin}>
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Login Absensi</h1>
 
