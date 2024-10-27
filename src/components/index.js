@@ -13,3 +13,4 @@ export { default as ModalNewGroup } from './ModalNewGroup';
 
 export { default as Loading } from './Loading';
 export { default as LoadingSkeleton } from './LoadingSkeleton';
+export { default as LoadingSkeletonTable } from './LoadingSkeletonTable';

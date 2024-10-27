@@ -2,13 +2,14 @@ import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 
-import { Loading, ModalUsersGroup, TableUsersGroup } from '../../components';
+import { LoadingSkeletonTable, ModalUsersGroup, TableUsersGroup } from '../../components';
 import useUserStore from '../../features/userStore';
 import useGroupStore from '../../features/groupStore';
+import { NotFound } from '../';
 
 function useSingleGroup(idActivity, idGroup) {
-  const { getAllUser } = useUserStore((state) => state);
-  const { singleGroup, isLoading, allGroup, getAllGroup, setSingleGroup, clearSingleGroup } = useGroupStore((state) => state);
+  const { isLoading: loadingUser, getAllUser } = useUserStore((state) => state);
+  const { singleGroup, isLoading, getAllGroup, setSingleGroup, clearSingleGroup } = useGroupStore((state) => state);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,20 +23,23 @@ function useSingleGroup(idActivity, idGroup) {
     fetchData();
   }, [idActivity, idGroup]);
 
-  return { singleGroup, isLoading };
+  return { singleGroup, isLoading, loadingUser };
 }
 
 function SingleGroup() {
   const { idGroup, idActivity } = useParams();
-  const { singleGroup, isLoading } = useSingleGroup(idActivity, idGroup);
+  const { singleGroup, isLoading, loadingUser } = useSingleGroup(idActivity, idGroup);
   const { setModalGroupUsers } = useGroupStore((state) => state);
 
   const openModalUserGroup = () => {
     setModalGroupUsers(true);
   };
 
-  if (isLoading) {
-    return <Loading />;
+  if (isLoading || loadingUser) {
+    return <LoadingSkeletonTable />;
+  }
+  if (!singleGroup) {
+    return <NotFound />;
   }
 
   return (

@@ -8,6 +8,7 @@ import { isoToDate } from '../../utils/helper';
 import useGroupStore from '../../features/groupStore';
 import useActivityStore from '../../features/activityStore';
 import { LoadingSkeleton, ModalNewGroup, TableGroupAdmin } from '../../components';
+import { NotFound } from '../';
 
 function SingleActivity() {
   const { allActivity, singleActivity, isLoading, getAllActivity, setSingleActivity } = useActivityStore((state) => state);
@@ -49,8 +50,12 @@ function SingleActivity() {
   }, []);
 
   // ! Tampilkan loading jika aktivitas belum ada
-  if (!singleActivity || isLoading) {
+  if (isLoading) {
     return <LoadingSkeleton />;
+  }
+
+  if (!singleActivity) {
+    return <NotFound />;
   }
 
   return (

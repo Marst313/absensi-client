@@ -29,7 +29,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/kegiatan/:id',
-        element: <SingleActivity />,
+        element: (
+          <ProtectedRoutes>
+            <SingleActivity />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: '/grup',
