@@ -61,7 +61,7 @@ const groupStore = (set, get) => ({
       const { data: response } = await fetchGetAllGroup(idActivity);
       const sortedData = response.data.groups?.sort((a, b) => a.nama_grup.localeCompare(b.nama_grup));
       set({ modalActivity: false, isLoading: false, allGroup: sortedData });
-      return response.message === 'Berhasil ditemukan';
+      return sortedData;
     } catch (error) {
       get().handleApiError(error);
       set({ isLoading: false });

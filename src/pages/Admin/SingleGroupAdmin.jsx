@@ -13,9 +13,10 @@ function useSingleGroup(idActivity, idGroup) {
   useEffect(() => {
     const fetchData = async () => {
       clearSingleGroup();
-      await getAllGroup(idActivity);
       await getAllUser();
-      setSingleGroup(idGroup, allGroup);
+      const groups = await getAllGroup(idActivity);
+
+      setSingleGroup(idGroup, groups);
     };
 
     fetchData();
