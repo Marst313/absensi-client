@@ -57,7 +57,7 @@ function Users() {
             <input
               type="text"
               id="table-search-users"
-              className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-gray-500 focus:border-gray-500 focus:outline-none w-full"
+              className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500 focus:outline-none w-full"
               placeholder="Search for NIM / NIP"
             />
           </div>
