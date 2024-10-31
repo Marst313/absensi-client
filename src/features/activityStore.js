@@ -45,7 +45,6 @@ const activityStore = (set, get) => ({
     set({ isLoading: true });
 
     try {
-      console.log(data);
       const response = await createNewActivity(data);
 
       set({ modalActivity: false, isLoading: false });

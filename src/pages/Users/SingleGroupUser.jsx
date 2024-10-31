@@ -3,17 +3,21 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { Loading } from '../../components';
-import useUserStore from '../../features/userStore';
-import useGroupStore from '../../features/groupStore';
 import { isoToDate } from '../../utils/helper';
+
+import useUserStore from '../../features/userStore';
+import useAgendaStore from '../../features/agendaStore';
+import useGroupStore from '../../features/groupStore';
 
 function useSingleGroup(idGroup) {
   const { singleGroup, setSingleGroup } = useGroupStore((state) => state);
+  const {} = useAgendaStore((state) => state);
 
   const { Groups, isLoading } = useUserStore((state) => state);
 
   useEffect(() => {
     const fetchData = async () => {
+      // await getAllAgenda()
       setSingleGroup(idGroup, Groups);
     };
 

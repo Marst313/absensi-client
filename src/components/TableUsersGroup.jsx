@@ -1,15 +1,24 @@
 import { tableHeaderGroupUser } from '../utils/constants';
 import defaultProfile from '../assets/images/defaultProfile.jpg';
 import useGroupStore from '../features/groupStore';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 function TableUserGroup() {
-  const { singleGroup } = useGroupStore((state) => state);
+  const { singleGroup, allGroup, setSingleGroup } = useGroupStore((state) => state);
+
+  const { idGroup } = useParams();
 
   // ! DELETE BUTTON USER
   const handleDeleteUser = (id) => {
     console.log(id);
   };
 
+  useEffect(() => {
+    setSingleGroup(idGroup, allGroup);
+  }, [allGroup]);
+
+  // ! IF THERE IS NO MAHASISWA RETURN THIS
   if (singleGroup?.mahasiswa?.length === 0) {
     return <h1 className="text-lg text-red-500">Belum Ada Mahasiswa Yang Mengikuti Grup Ini.</h1>;
   }

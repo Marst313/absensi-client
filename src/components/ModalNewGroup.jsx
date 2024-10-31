@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import useGroupStore from '../features/groupStore';
 import { IoClose } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
+import useUserStore from '../features/userStore';
 
 function ModalNewGroup() {
   const [newGroup, setNewGroup] = useState({ groupName: '' });
   const { modalGroup, isLoading, setModalGroup, createNewGroup, getAllGroup } = useGroupStore((state) => state);
+  const { id } = useUserStore((state) => state);
 
   const { id: idActivity } = useParams();
 
@@ -18,7 +20,7 @@ function ModalNewGroup() {
   const handleCreateGroup = async (e) => {
     e.preventDefault();
 
-    await createNewGroup({ idActivity, groupName: newGroup.groupName });
+    await createNewGroup({ idActivity, groupName: newGroup.groupName, id });
 
     // ! GET THE NEWEST GROUP
     await getAllGroup(idActivity);

@@ -3,7 +3,7 @@ function LoadingSkeleton({ total = 6 }) {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 ">
       {Array.from({ length: total }).map((_, index) => {
         return (
-          <div className="flex w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg animate-pulse dark:bg-gray-800">
+          <div key={index} className="flex w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg animate-pulse dark:bg-gray-800">
             <div className="w-1/3 bg-gray-300 dark:bg-gray-600" />
             <div className="w-2/3 p-4 md:p-4">
               <h1 className="w-40 h-2 bg-gray-200 rounded-lg dark:bg-gray-700" />

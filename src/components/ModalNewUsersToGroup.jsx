@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useGroupStore from '../features/groupStore';
 import { IoClose, IoSearchOutline } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
@@ -6,7 +6,7 @@ import useUserStore from '../features/userStore';
 
 function ModalUsersGroup() {
   const [newUsers, setNewUsers] = useState({ listUsers: '' });
-  const { modalGroupUsers, isLoading, allGroup, setModalGroupUsers, getAllGroup, connectUserToGroup, setSingleGroup } = useGroupStore((state) => state);
+  const { modalGroupUsers, isLoading, setModalGroupUsers, getAllGroup, connectUserToGroup } = useGroupStore((state) => state);
 
   const { allUser } = useUserStore((state) => state);
 
@@ -23,7 +23,6 @@ function ModalUsersGroup() {
 
     await connectUserToGroup({ idGroup, idUser: newUsers.listUsers });
     await getAllGroup(idActivity);
-    setSingleGroup(idGroup, allGroup);
 
     setNewUsers({ listUsers: '' });
   };

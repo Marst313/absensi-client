@@ -1,15 +1,17 @@
 export { default as Sidebar } from './Sidebar';
 
 export { default as TableActivity } from './TableActivityAdmin';
+export { default as TableAgenda } from './TableAgenda';
 export { default as TableUsers } from './TableUsers';
 export { default as TableUsersGroup } from './TableUsersGroup';
 export { default as TableGroupAdmin } from './TableGroupAdmin';
 
-export { default as ModalUser } from './ModalUser';
-export { default as ModalUsersGroup } from './ModalUsersGroup';
-export { default as ModalActivity } from './ModalActivity';
+export { default as ModalUser } from './ModalNewUser';
+export { default as ModalUsersGroup } from './ModalNewUsersToGroup';
+export { default as ModalActivity } from './ModalNewActivity';
 export { default as ModalProfile } from './ModalProfile';
 export { default as ModalNewGroup } from './ModalNewGroup';
+export { default as ModalNewAgenda } from './ModalNewAgenda';
 
 export { default as Loading } from './Loading';
 export { default as LoadingSkeleton } from './LoadingSkeleton';

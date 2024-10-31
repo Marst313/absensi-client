@@ -2,6 +2,7 @@ import customFetch from '../utils/axios';
 
 export const fetchCreateNewGroup = async (data) => {
   return customFetch.post('/add/group', {
+    creatorId: data.id,
     nama_grup: data.groupName,
     id_kegiatan: data.idActivity,
   });

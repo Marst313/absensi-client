@@ -46,6 +46,8 @@ const groupStore = (set, get) => ({
     try {
       const { data: response } = await fetchCreateNewGroup(data);
       set({ modalGroup: false, isLoading: false });
+      toast.success(response?.message);
+
       return response.message === 'Group kegiatan berhasil dibuat';
     } catch (error) {
       get().handleApiError(error);
