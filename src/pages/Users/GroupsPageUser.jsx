@@ -30,7 +30,7 @@ function GroupsPageUser() {
                 {grup?.nama_grup}
               </h5>
 
-              <hr className="h-1  bg-primary/20 rounded-full border-0 dark:bg-gray-700 w-3/4" />
+              <hr />
 
               {/* Title */}
               <h5 className="text-base tracking-tight text-gray-900 capitalize my-2 mb-3 flex font-light items-center gap-3">

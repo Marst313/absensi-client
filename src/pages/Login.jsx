@@ -1,58 +1,46 @@
 import { useEffect, useState } from 'react';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
-import useUserStore from '../features/userStore';
 import { useNavigate } from 'react-router-dom';
+
+import useUserStore from '../features/userStore';
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [loginForm, setLoginForm] = useState({ nim: '', password: '' });
   const { isLoading, token, login, validateToken } = useUserStore((state) => state);
-
   const navigate = useNavigate();
 
-  // ! Toggle password vissible or not
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
-  // ! For Input NIM & Password
-  const handleChangeFormLogin = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // ! For Submit Button
-  const handleSubmitLogin = async (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-
     const success = await login(loginForm);
-
-    if (success) {
-      navigate('/');
-    }
+    if (success) navigate('/');
   };
 
   useEffect(() => {
-    // ! Check if token exist and valid
-    const checkToken = async () => {
+    const verifyToken = async () => {
       if (token) {
         const isValid = await validateToken(token);
-        if (isValid) {
-          navigate('/');
-        }
+        if (isValid) navigate('/');
       }
     };
-    checkToken();
+    verifyToken();
   }, [token, validateToken, navigate]);
 
   return (
-    <section className="h-screen flex items-center justify-center bg-gradient-to-r p-4 from-blue-500 to-purple-600">
-      <form className="w-full max-w-sm p-8 bg-white shadow-lg rounded-xl" onSubmit={handleSubmitLogin}>
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Login Absensi</h1>
+    <section className="flex items-center justify-center h-screen p-4 bg-gradient-to-r from-blue-500 to-purple-600">
+      <form onSubmit={handleLoginSubmit} className="w-full max-w-sm p-8 bg-white shadow-lg rounded-xl">
+        <h1 className="mb-6 text-2xl font-bold text-center text-gray-800">Login Absensi</h1>
 
-        {/* NIM Field */}
+        {/* NIM Input */}
         <div className="mb-4">
-          <label htmlFor="nim" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="nim" className="block mb-1 text-sm font-medium text-gray-700">
             NIM
           </label>
           <input
@@ -60,16 +48,16 @@ function Login() {
             id="nim"
             name="nim"
             value={loginForm.nim}
-            onChange={handleChangeFormLogin}
+            onChange={handleInputChange}
             placeholder="21.11.4110"
-            className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+            className="w-full px-4 py-2 text-gray-700 transition border rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             required
           />
         </div>
 
-        {/* Password Field with Toggle Visibility */}
-        <div className="mb-5 relative">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+        {/* Password Input with Toggle */}
+        <div className="relative mb-5">
+          <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-700">
             Password
           </label>
           <input
@@ -77,9 +65,9 @@ function Login() {
             id="password"
             name="password"
             value={loginForm.password}
-            onChange={handleChangeFormLogin}
+            onChange={handleInputChange}
             placeholder="********"
-            className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+            className="w-full px-4 py-2 text-gray-700 transition border rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             required
           />
           <button type="button" onClick={togglePasswordVisibility} className="absolute inset-y-0 right-3 top-5 flex items-center">
@@ -90,8 +78,8 @@ function Login() {
         {/* Submit Button */}
         <button
           type="submit"
-          className={`w-full py-2.5 ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} text-white font-semibold rounded-lg transition focus:ring-2 focus:ring-blue-300 focus:outline-none`}
           disabled={isLoading}
+          className={`w-full py-2.5 text-white font-semibold rounded-lg transition focus:ring-2 focus:ring-blue-300 focus:outline-none ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
         >
           {isLoading ? 'Loading...' : 'Login'}
         </button>

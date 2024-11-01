@@ -10,7 +10,7 @@ function TableUsers({ data, tableHeader, role }) {
   };
 
   if (!data) {
-    return <h1 className="mt-3 text-lg font-semibold text-red-500">Data tidak ditemukan</h1>;
+    return <h1 className="not-found">Data mahasiswa tidak ditemukan</h1>;
   }
 
   return (

@@ -5,7 +5,7 @@ import { createNewAgenda as createNewAgendaApi, getAllAgenda as getAllAgendaApi 
 const agendaStore = (set, get) => ({
   id: '',
 
-  allAgenda: {},
+  allAgenda: [],
 
   modalAgenda: false,
   isLoading: false,
@@ -59,8 +59,7 @@ const agendaStore = (set, get) => ({
 
     try {
       const response = await getAllAgendaApi(data);
-
-      set({ isLoading: false });
+      set({ isLoading: false, allAgenda: response.data.agendas });
 
       return true;
     } catch (error) {

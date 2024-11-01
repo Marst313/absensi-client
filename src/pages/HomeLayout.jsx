@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { RiMenu2Line } from 'react-icons/ri';
+import { IoMdNotifications } from 'react-icons/io';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import { ModalProfile, Sidebar } from '../components';
 import useUserStore from '../features/userStore';
-import { IoMdNotifications } from 'react-icons/io';
 
 function HomeLayout() {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -40,30 +40,28 @@ function HomeLayout() {
   }, [name, email]);
 
   return (
-    <div>
-      <div className="w-full flex items-center justify-between mt-2 p-2">
-        <button
-          onClick={() => setSideBar(true)}
-          type="button"
-          className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-primary hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
-        >
-          <span className="sr-only">Open sidebar</span>
-          <RiMenu2Line className="w-7 h-7" />
+    <section>
+      {/* HEADER LAYOUT */}
+      <div className="header-nav">
+        <button onClick={() => setSideBar(true)} type="button">
+          <RiMenu2Line />
         </button>
-        <button className="w-10 h-10">
-          <IoMdNotifications className="w-7 h-7 text-primary hover:text-slate-600" />
+        <button>
+          <IoMdNotifications />
         </button>
       </div>
+      {/* HEADER LAYOUT */}
 
       {/* SIDEBAR */}
       <Sidebar openSidebar={openSidebar} setSidebar={setSideBar} />
 
+      {/* CONTENT */}
       <div className="p-4 sm:ml-64">
         <Outlet />
       </div>
 
       {modalProfile && !isLoading && <ModalProfile />}
-    </div>
+    </section>
   );
 }
 export default HomeLayout;

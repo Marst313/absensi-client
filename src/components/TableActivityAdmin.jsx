@@ -3,8 +3,9 @@ import useActivityStore from '../features/activityStore';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { isoToDate } from '../utils/helper';
 import { BsFileEarmarkBarGraph } from 'react-icons/bs';
+import { MdGroupAdd } from 'react-icons/md';
 
-function TableActivity() {
+function TableActivity({ setModalGroup }) {
   const { allActivity } = useActivityStore((state) => state);
 
   if (allActivity.length === 0) {
@@ -26,11 +27,18 @@ function TableActivity() {
 
           {/* Bottom Section */}
           <div className="flex items-center justify-between mt-auto">
-            {/* Link */}
-            <Link to={`${activity.id}`} className="inline-flex items-center px-4 py-2 text-xs lg:text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
-              Lihat Kegiatan
-              <FaLongArrowAltRight className="w-4 h-4 ms-2" />
-            </Link>
+            <div className="flex flex-col gap-2">
+              {/* Link */}
+              <Link to={`${activity.id}`} className="open-button__small">
+                Lihat Kegiatan
+                <FaLongArrowAltRight className="w-4 h-4 ms-2" />
+              </Link>
+
+              <button onClick={() => setModalGroup(true)} type="button" className="add-button__small">
+                Tambah Grup Baru
+                <MdGroupAdd className="w-4 h-4 ms-2" />
+              </button>
+            </div>
 
             {/* Time Info */}
             <div className="text-xs text-center text-gray-500">

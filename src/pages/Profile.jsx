@@ -2,7 +2,7 @@ import ModalProfile from '../components/ModalProfile';
 import useUserStore from '../features/userStore';
 
 function Profile() {
-  const { avatar, name, role, nim, email, modalProfile, setModalProfile } = useUserStore((state) => state);
+  const { avatar, name, role, nim, email, setModalProfile } = useUserStore((state) => state);
 
   const handleSetModal = (data) => {
     setModalProfile(data);
@@ -10,7 +10,7 @@ function Profile() {
 
   return (
     <div className="flex flex-col items-center  min-h-[calc(100vh-8rem)] p-4 bg-gray-100">
-      {modalProfile && <ModalProfile />}
+      <ModalProfile />
 
       <div className="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow-lg p-6">
         {/* Edit Profile Button */}

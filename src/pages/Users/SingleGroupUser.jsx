@@ -46,7 +46,7 @@ function SingleGroupUser() {
         <h1 className="capitalize font-medium text-lg">{singleGroup?.kegiatan?.nama}</h1>
       </div>
 
-      <hr className="h-1  bg-primary/20 rounded-full border-0 dark:bg-gray-700 w-full my-3" />
+      <hr />
 
       <div className="border-2  shadow-sm px-3 py-3 rounded-md">
         {/* HEADER */}
@@ -65,7 +65,7 @@ function SingleGroupUser() {
         </div>
         {/* HEADER */}
 
-        <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+        <hr />
 
         {/* CONTENT */}
         <p className="opacity-50">Deskripsi Kegiatan : </p>

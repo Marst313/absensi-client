@@ -1,13 +1,14 @@
 import { FaUserPlus } from 'react-icons/fa';
 import { IoIosSearch } from 'react-icons/io';
+import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+
 import { ModalUser, TableUsers } from '../components';
 import useUserStore from '../features/userStore';
-import { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
 import { tableHeaderUser } from '../utils/constants';
 
 function Users() {
-  const { modalUser, role, allUser, setModalUser, getAllUser } = useUserStore((state) => state);
+  const { role, allUser, setModalUser, getAllUser } = useUserStore((state) => state);
 
   const handleSetModal = (data) => {
     setModalUser(data);
@@ -23,49 +24,52 @@ function Users() {
 
   return (
     <section>
-      {modalUser && <ModalUser />}
+      {/* MODAL CREATE NEW USER */}
+      <ModalUser />
 
-      <div className="relative   sm:rounded-lg">
-        <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 ">
-          <div>
-            <button
-              className="inline-flex items-center text-white bg-green-500 border border-gray-300 focus:outline-none hover:bg-green-600 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5"
-              type="button"
-              onClick={() => handleSetModal(true)}
-            >
-              <span className="sr-only">Add New User Button</span>
-              Tambah Mahasiswa Baru
-              <FaUserPlus className="w-4 h-4 ms-2.5" />
-            </button>
-            <select
-              className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 mt-3 lg:mt-0 ms-5"
-              onChange={(e) => console.log(e.target.value)}
-            >
-              <option value="ascending-number">No (asc)</option>
-              <option value="descending-number">No (desc)</option>
-              <option value="ascending-name">Name (A-Z)</option>
-              <option value="descending-name">Name (Z-A)</option>
-            </select>
-          </div>
-          <label htmlFor="table-search-users" className="sr-only">
-            Search
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-              <IoIosSearch className="w-4 h-4 text-gray-500" />
-            </div>
-            <input
-              type="text"
-              id="table-search-users"
-              className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-500 focus:border-gray-500 focus:outline-none w-full"
-              placeholder="Search for NIM / NIP"
-            />
-          </div>
-        </div>
+      {/* HEADER */}
+      <HeaderUser handleSetModal={handleSetModal} />
 
-        <TableUsers data={allUser} role={role} tableHeader={tableHeaderUser} />
-      </div>
+      {/* TABLE MAHASISWA */}
+      <TableUsers data={allUser} role={role} tableHeader={tableHeaderUser} />
     </section>
   );
 }
+
+function HeaderUser({ handleSetModal }) {
+  return (
+    <div className="header-user">
+      <div>
+        <button className="add-button__small" type="button" onClick={() => handleSetModal(true)}>
+          Tambah Mahasiswa Baru
+          <FaUserPlus className="w-4 h-4 ms-2.5" />
+        </button>
+
+        {/* FILTER BY NO */}
+        <SelectOption />
+      </div>
+
+      {/* Search Mahasiswa */}
+      <div className="search">
+        <label htmlFor="table-search-users">Search</label>
+        <div className="container-search">
+          <IoIosSearch />
+        </div>
+        <input type="text" id="table-search-users" placeholder="Search for NIM/NIP" className="input-search" />
+      </div>
+    </div>
+  );
+}
+
+function SelectOption() {
+  return (
+    <select className="select-filter" onChange={(e) => console.log(e.target.value)}>
+      <option value="ascending-number">No (asc)</option>
+      <option value="descending-number">No (desc)</option>
+      <option value="ascending-name">Name (A-Z)</option>
+      <option value="descending-name">Name (Z-A)</option>
+    </select>
+  );
+}
+
 export default Users;

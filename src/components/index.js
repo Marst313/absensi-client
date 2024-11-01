@@ -1,7 +1,7 @@
 export { default as Sidebar } from './Sidebar';
 
 export { default as TableActivity } from './TableActivityAdmin';
-export { default as TableAgenda } from './TableAgenda';
+export { default as TableAgendaAdmin } from './TableAgendaAdmin';
 export { default as TableUsers } from './TableUsers';
 export { default as TableUsersGroup } from './TableUsersGroup';
 export { default as TableGroupAdmin } from './TableGroupAdmin';

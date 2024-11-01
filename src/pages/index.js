@@ -10,6 +10,7 @@ export { default as Users } from './Users';
 export { default as NotFound } from './NotFound';
 
 // ADMIN
+export { default as SingleAgendaAdmin } from './Admin/SingleAgendaAdmin';
 export { default as SingleActivity } from './Admin/SingleActivityAdmin';
 export { default as SingleGroupAdmin } from './Admin/SingleGroupAdmin';
 
