@@ -1,6 +1,7 @@
 import { IoClose, IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import useUserStore from '../features/userStore';
 import { useState } from 'react';
+import HeaderModal from './HeaderModal';
 
 function ModalUser() {
   const [newUserForm, setNewUserForm] = useState({ nim: '', password: '', role: 'MHS' });
@@ -30,23 +31,12 @@ function ModalUser() {
         {/* MODAL CONTENT */}
         <div className="modal-new__container">
           {/* MODAL HEADER */}
-          <HeaderModal handleCloseModalUser={handleCloseModalUser} isLoading={isLoading} />
+          <HeaderModal setOpenModal={setModalUser} title={'Tambah Mahasiswa Baru'} isLoading={isLoading} />
 
           {/* MODAL BODY */}
           <BodyModal handleChangeCreateUser={handleChangeCreateUser} handleCreateNewUser={handleCreateNewUser} isLoading={isLoading} newUserForm={newUserForm} handleCloseModalUser={handleCloseModalUser} />
         </div>
       </div>
-    </div>
-  );
-}
-
-function HeaderModal({ handleCloseModalUser, isLoading }) {
-  return (
-    <div className="modal-new__header">
-      <h3>Tambah Mahasiswa Baru</h3>
-      <button type="button" onClick={handleCloseModalUser} disabled={isLoading} className="close-button__small">
-        <IoClose />
-      </button>
     </div>
   );
 }

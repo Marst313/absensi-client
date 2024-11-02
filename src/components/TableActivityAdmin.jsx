@@ -35,7 +35,7 @@ function TableActivity({ setModalGroup }) {
               </Link>
 
               <button onClick={() => setModalGroup(true)} type="button" className="add-button__small">
-                Tambah Grup Baru
+                Tambah Grup
                 <MdGroupAdd className="w-4 h-4 ms-2" />
               </button>
             </div>

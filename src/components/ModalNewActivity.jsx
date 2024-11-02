@@ -2,6 +2,7 @@ import { IoClose } from 'react-icons/io5';
 import { useState } from 'react';
 import useActivityStore from '../features/activityStore';
 import useUserStore from '../features/userStore';
+import HeaderModal from './HeaderModal';
 
 function ModalActivity() {
   const [newActivityForm, setNewActivityForm] = useState({ nama: '', deskripsi: '', waktumulai: '', waktuselesai: '' });
@@ -36,23 +37,12 @@ function ModalActivity() {
         {/* MODAL CONTENT */}
         <div className="modal-new__container">
           {/* MODAL HEADER */}
-          <HeaderModal handleCloseModalActivity={handleCloseModalActivity} isLoading={isLoading} />
+          <HeaderModal setOpenModal={setModalActivity} title={'Tambah Kegiatan Baru'} isLoading={isLoading} />
 
           {/* MODAL BODY */}
           <BodyModal handleChangeCreateActivity={handleChangeCreateActivity} handleCloseModalActivity={handleCloseModalActivity} handleCreateNewActivity={handleCreateNewActivity} newActivityForm={newActivityForm} isLoading={isLoading} />
         </div>
       </div>
-    </div>
-  );
-}
-
-function HeaderModal({ handleCloseModalActivity, isLoading }) {
-  return (
-    <div className="modal-new__header">
-      <h3>Tambah Kegiatan Baru</h3>
-      <button type="button" onClick={handleCloseModalActivity} disabled={isLoading} className="close-button__small">
-        <IoClose />
-      </button>
     </div>
   );
 }

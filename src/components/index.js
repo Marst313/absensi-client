@@ -13,6 +13,9 @@ export { default as ModalProfile } from './ModalProfile';
 export { default as ModalNewGroup } from './ModalNewGroup';
 export { default as ModalNewAgenda } from './ModalNewAgenda';
 
+// MODAL
+export { default as HeaderModal } from './HeaderModal';
+
 export { default as Loading } from './Loading';
 export { default as LoadingSkeleton } from './LoadingSkeleton';
 export { default as LoadingSkeletonTable } from './LoadingSkeletonTable';

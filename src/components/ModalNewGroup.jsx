@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { IoClose } from 'react-icons/io5';
 
 import useGroupStore from '../features/groupStore';
 import useUserStore from '../features/userStore';
 import useActivityStore from '../features/activityStore';
+import { HeaderModal } from './';
 
 function ModalNewGroup() {
   const [newGroup, setNewGroup] = useState({ groupName: '' });
@@ -15,19 +15,14 @@ function ModalNewGroup() {
   const handleCloseNewModalGroup = () => {
     setModalGroup(false);
   };
-
   //! HANDLE FORM SUBMISSION
   const handleCreateGroup = async (e) => {
     e.preventDefault();
-
     await createNewGroup({ idActivity, groupName: newGroup.groupName, id });
-
     // ! GET THE NEWEST GROUP
     await getAllGroup(idActivity);
-
     setNewGroup({ groupName: '' });
   };
-
   // ! HANDLE STATE FORM
   const handleChangeCreateGroup = (e) => {
     const { name, value } = e.target;
@@ -40,22 +35,11 @@ function ModalNewGroup() {
         {/* MODAL CONTENT */}
         <div className="modal-new__container">
           {/* MODAL HEADER */}
-          <HeaderModal handleCloseNewModalGroup={handleCloseNewModalGroup} isLoading={isLoading} />
+          <HeaderModal setOpenModal={setModalGroup} title={'Tambah Grup Baru'} isLoading={isLoading} />
           {/* MODAL BODY */}
           <BodyModal handleChangeCreateGroup={handleChangeCreateGroup} handleCloseNewModalGroup={handleCloseNewModalGroup} handleCreateGroup={handleCreateGroup} newGroup={newGroup} isLoading={isLoading} />
         </div>
       </div>
-    </div>
-  );
-}
-
-function HeaderModal({ handleCloseNewModalGroup, isLoading }) {
-  return (
-    <div className="modal-new__header">
-      <h3>Masukkan Nama Grup</h3>
-      <button type="button" onClick={handleCloseNewModalGroup} disabled={isLoading} className="close-button__small">
-        <IoClose />
-      </button>
     </div>
   );
 }

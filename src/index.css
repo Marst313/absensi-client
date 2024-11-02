@@ -142,10 +142,10 @@
   @apply text-sm md:text-base px-5 py-2.5 bg-green-500 text-white rounded-lg hover:bg-green-700 w-fit;
 }
 .back-button__medium {
-  @apply bg-primary text-white px-5 py-2.5 rounded-xl hover:bg-slate-700 flex items-center text-sm md:text-base w-fit;
+  @apply bg-primary text-white px-5 py-2.5 rounded-lg hover:bg-slate-700 flex items-center text-sm md:text-base w-fit;
 }
 .open-button__small {
-  @apply inline-flex items-center px-4 py-2 text-xs lg:text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 w-fit;
+  @apply inline-flex items-center px-4 py-2 text-xs  font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 w-fit;
 }
 .open-button__medium {
   @apply inline-flex items-center px-4 py-3 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 w-fit;
