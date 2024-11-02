@@ -1,8 +1,8 @@
-import { IoClose } from 'react-icons/io5';
 import { useState } from 'react';
+
 import useActivityStore from '../features/activityStore';
 import useUserStore from '../features/userStore';
-import HeaderModal from './HeaderModal';
+import { HeaderModal, FooterModal } from './';
 
 function ModalActivity() {
   const [newActivityForm, setNewActivityForm] = useState({ nama: '', deskripsi: '', waktumulai: '', waktuselesai: '' });
@@ -15,20 +15,12 @@ function ModalActivity() {
     const { name, value } = e.target;
     setNewActivityForm((prev) => ({ ...prev, [name]: value }));
   };
-
   // ! CREATE NEW ACTIVITY
   const handleCreateNewActivity = async (e) => {
     e.preventDefault();
-
     await createNewActivity({ ...newActivityForm, creatorId: id });
     await getAllActivity(id);
-
     setNewActivityForm({ nama: '', deskripsi: '', waktumulai: '', waktuselesai: '' });
-  };
-
-  // ! CLOSE MODAL ACTIVITY
-  const handleCloseModalActivity = () => {
-    setModalActivity(false);
   };
 
   return (
@@ -40,14 +32,14 @@ function ModalActivity() {
           <HeaderModal setOpenModal={setModalActivity} title={'Tambah Kegiatan Baru'} isLoading={isLoading} />
 
           {/* MODAL BODY */}
-          <BodyModal handleChangeCreateActivity={handleChangeCreateActivity} handleCloseModalActivity={handleCloseModalActivity} handleCreateNewActivity={handleCreateNewActivity} newActivityForm={newActivityForm} isLoading={isLoading} />
+          <BodyModal handleChangeCreateActivity={handleChangeCreateActivity} setModalActivity={setModalActivity} handleCreateNewActivity={handleCreateNewActivity} newActivityForm={newActivityForm} isLoading={isLoading} />
         </div>
       </div>
     </div>
   );
 }
 
-function BodyModal({ handleCreateNewActivity, newActivityForm, handleChangeCreateActivity, handleCloseModalActivity, isLoading }) {
+function BodyModal({ handleCreateNewActivity, newActivityForm, handleChangeCreateActivity, isLoading, setModalActivity }) {
   return (
     <div className="modal-new__body">
       <form onSubmit={handleCreateNewActivity}>
@@ -76,14 +68,7 @@ function BodyModal({ handleCreateNewActivity, newActivityForm, handleChangeCreat
         </div>
 
         {/* MODAL FOOTER */}
-        <div className="modal-new__footer">
-          <button type="submit" disabled={isLoading} className="submit-button__medium">
-            {isLoading ? 'Loading...' : 'Tambah'}
-          </button>
-          <button type="button" onClick={handleCloseModalActivity} className="cancel-button__medium" disabled={isLoading}>
-            Cancel
-          </button>
-        </div>
+        <FooterModal isLoading={isLoading} setOpenModal={setModalActivity} />
       </form>
     </div>
   );

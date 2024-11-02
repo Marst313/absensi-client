@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import useUserStore from '../features/userStore';
 import useGroupStore from '../features/groupStore';
-import { HeaderModal } from './';
+import { FooterModal, HeaderModal } from './';
 
 function ModalUsersGroup() {
   const [newUsers, setNewUsers] = useState({ listUsers: '' });
@@ -38,20 +38,20 @@ function ModalUsersGroup() {
   return (
     <div className={`${modalGroupUsers ? 'flex' : 'hidden'} modal-new`}>
       <div>
-        {/* Modal content */}
+        {/* MODAL CONTENT */}
         <div className="modal-new__container">
-          {/* Modal header */}
+          {/* MODAL HEADER */}
           <HeaderModal setOpenModal={setModalGroupUsers} title={'Tambahkan Mahasiswa Ke Grup'} isLoading={isLoading} />
 
-          {/* Modal body */}
-          <BodyModal allUser={allUser} handleAddUserGroup={handleAddUserGroup} handleChangeListUsers={handleChangeListUsers} handleCloseNewModalGroup={handleCloseNewModalGroup} isLoading={isLoading} />
+          {/* MODAL BODY */}
+          <BodyModal allUser={allUser} handleAddUserGroup={handleAddUserGroup} handleChangeListUsers={handleChangeListUsers} isLoading={isLoading} setModalGroupUsers={setModalGroupUsers} />
         </div>
       </div>
     </div>
   );
 }
 
-function BodyModal({ handleAddUserGroup, handleChangeListUsers, allUser, handleCloseNewModalGroup, isLoading }) {
+function BodyModal({ handleAddUserGroup, handleChangeListUsers, allUser, isLoading, setModalGroupUsers }) {
   return (
     <div className="modal-new__body">
       {/* SEARCH Field */}
@@ -83,15 +83,8 @@ function BodyModal({ handleAddUserGroup, handleChangeListUsers, allUser, handleC
           </select>
         </div>
 
-        {/* Modal footer */}
-        <div className="modal-new__footer">
-          <button type="submit" disabled={isLoading} className="submit-button__medium">
-            {isLoading ? 'Loading...' : 'Tambah'}
-          </button>
-          <button type="button" onClick={handleCloseNewModalGroup} className="cancel-button__medium" disabled={isLoading}>
-            Cancel
-          </button>
-        </div>
+        {/* MODAL FOOTER */}
+        <FooterModal isLoading={isLoading} setOpenModal={setModalGroupUsers} />
       </form>
     </div>
   );

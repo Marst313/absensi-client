@@ -1,7 +1,7 @@
-import { IoClose, IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import useUserStore from '../features/userStore';
 import { useState } from 'react';
-import HeaderModal from './HeaderModal';
+import { HeaderModal, FooterModal } from './';
 
 function ModalUser() {
   const [newUserForm, setNewUserForm] = useState({ nim: '', password: '', role: 'MHS' });
@@ -34,14 +34,14 @@ function ModalUser() {
           <HeaderModal setOpenModal={setModalUser} title={'Tambah Mahasiswa Baru'} isLoading={isLoading} />
 
           {/* MODAL BODY */}
-          <BodyModal handleChangeCreateUser={handleChangeCreateUser} handleCreateNewUser={handleCreateNewUser} isLoading={isLoading} newUserForm={newUserForm} handleCloseModalUser={handleCloseModalUser} />
+          <BodyModal handleChangeCreateUser={handleChangeCreateUser} handleCreateNewUser={handleCreateNewUser} isLoading={isLoading} newUserForm={newUserForm} setModalUser={setModalUser} />
         </div>
       </div>
     </div>
   );
 }
 
-function BodyModal({ handleCreateNewUser, handleChangeCreateUser, handleCloseModalUser, newUserForm, isLoading }) {
+function BodyModal({ handleCreateNewUser, handleChangeCreateUser, newUserForm, isLoading, setModalUser }) {
   const [showPassword, setShowPassword] = useState(false);
 
   // ! Toggle password vissible or not
@@ -77,14 +77,7 @@ function BodyModal({ handleCreateNewUser, handleChangeCreateUser, handleCloseMod
         </div>
 
         {/* Modal footer */}
-        <div className="modal-new__footer">
-          <button type="submit" disabled={isLoading} className="submit-button__medium">
-            {isLoading ? 'Loading...' : 'Tambah'}
-          </button>
-          <button type="button" onClick={handleCloseModalUser} className="cancel-button__medium" disabled={isLoading}>
-            Cancel
-          </button>
-        </div>
+        <FooterModal isLoading={isLoading} setOpenModal={setModalUser} />
       </form>
     </div>
   );

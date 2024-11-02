@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useGroupStore from '../features/groupStore';
 import useUserStore from '../features/userStore';
 import useActivityStore from '../features/activityStore';
-import { HeaderModal } from './';
+import { FooterModal, HeaderModal } from './';
 
 function ModalNewGroup() {
   const [newGroup, setNewGroup] = useState({ groupName: '' });
@@ -37,14 +37,14 @@ function ModalNewGroup() {
           {/* MODAL HEADER */}
           <HeaderModal setOpenModal={setModalGroup} title={'Tambah Grup Baru'} isLoading={isLoading} />
           {/* MODAL BODY */}
-          <BodyModal handleChangeCreateGroup={handleChangeCreateGroup} handleCloseNewModalGroup={handleCloseNewModalGroup} handleCreateGroup={handleCreateGroup} newGroup={newGroup} isLoading={isLoading} />
+          <BodyModal handleChangeCreateGroup={handleChangeCreateGroup} handleCreateGroup={handleCreateGroup} newGroup={newGroup} isLoading={isLoading} setModalGroup={setModalGroup} />
         </div>
       </div>
     </div>
   );
 }
 
-function BodyModal({ handleCreateGroup, newGroup, handleChangeCreateGroup, isLoading, handleCloseNewModalGroup }) {
+function BodyModal({ handleCreateGroup, newGroup, handleChangeCreateGroup, isLoading, setModalGroup }) {
   return (
     <div className="modal-new__body">
       <form onSubmit={handleCreateGroup}>
@@ -54,15 +54,8 @@ function BodyModal({ handleCreateGroup, newGroup, handleChangeCreateGroup, isLoa
           <input type="text" id="groupName" name="groupName" value={newGroup.groupName} onChange={handleChangeCreateGroup} placeholder="Nama Grup" required />
         </div>
 
-        {/* Modal footer */}
-        <div className="modal-new__footer">
-          <button type="submit" disabled={isLoading} className="submit-button__medium">
-            {isLoading ? 'Loading...' : 'Tambah'}
-          </button>
-          <button type="button" onClick={handleCloseNewModalGroup} className="cancel-button__medium" disabled={isLoading}>
-            Cancel
-          </button>
-        </div>
+        {/* MODAL FOOTER */}
+        <FooterModal isLoading={isLoading} setOpenModal={setModalGroup} />
       </form>
     </div>
   );

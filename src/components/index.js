@@ -14,7 +14,8 @@ export { default as ModalNewGroup } from './ModalNewGroup';
 export { default as ModalNewAgenda } from './ModalNewAgenda';
 
 // MODAL
-export { default as HeaderModal } from './HeaderModal';
+export { default as HeaderModal } from './NewModal/HeaderModal';
+export { default as FooterModal } from './NewModal/FooterModal';
 
 export { default as Loading } from './Loading';
 export { default as LoadingSkeleton } from './LoadingSkeleton';

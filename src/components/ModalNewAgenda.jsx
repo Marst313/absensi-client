@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import useUserStore from '../features/userStore';
 import useAgendaStore from '../features/agendaStore';
-import { HeaderModal } from './';
+import { FooterModal, HeaderModal } from './';
 
 function ModalNewAgenda() {
   const [newAgendaForm, setNewAgendaForm] = useState({ name: '', deskripsi: '' });
@@ -22,10 +22,6 @@ function ModalNewAgenda() {
     setNewAgendaForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCloseModalAgenda = () => {
-    setModalAgenda(false);
-  };
-
   return (
     <div className={`${modalAgenda ? 'flex' : 'hidden'} modal-new`}>
       <div>
@@ -35,14 +31,14 @@ function ModalNewAgenda() {
           <HeaderModal setOpenModal={setModalAgenda} title={'Tambah Agenda Baru'} isLoading={isLoading} />
 
           {/* MODAL BODY */}
-          <BodyModal handleChangeCreateAgenda={handleChangeCreateAgenda} handleCloseModalAgenda={handleCloseModalAgenda} handleCreateNewAgenda={handleCreateNewAgenda} isLoading={isLoading} newAgendaForm={newAgendaForm} />
+          <BodyModal handleChangeCreateAgenda={handleChangeCreateAgenda} handleCreateNewAgenda={handleCreateNewAgenda} isLoading={isLoading} newAgendaForm={newAgendaForm} setModalAgenda={setModalAgenda} />
         </div>
       </div>
     </div>
   );
 }
 
-function BodyModal({ handleCreateNewAgenda, handleChangeCreateAgenda, newAgendaForm, isLoading, handleCloseModalAgenda }) {
+function BodyModal({ handleCreateNewAgenda, handleChangeCreateAgenda, newAgendaForm, isLoading, setModalAgenda }) {
   return (
     <div className="modal-new__body">
       <form onSubmit={handleCreateNewAgenda}>
@@ -59,14 +55,7 @@ function BodyModal({ handleCreateNewAgenda, handleChangeCreateAgenda, newAgendaF
         </div>
 
         {/* MODAL FOOTER */}
-        <div className="modal-new__footer">
-          <button type="submit" disabled={isLoading} className="submit-button__medium">
-            {isLoading ? 'Loading...' : 'Tambah'}
-          </button>
-          <button type="button" onClick={handleCloseModalAgenda} className="cancel-button__medium" disabled={isLoading}>
-            Cancel
-          </button>
-        </div>
+        <FooterModal isLoading={isLoading} setOpenModal={setModalAgenda} />
       </form>
     </div>
   );

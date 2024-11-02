@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useUserStore from '../features/userStore';
 import { IoClose } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
-import { HeaderModal } from './';
+import { FooterModal, HeaderModal } from './';
 
 function ModalProfile() {
   const { name, email, avatar, nim, isLoading, modalProfile, role, id, setModalProfile, updateUserProfile, updateUserAvatar } = useUserStore((state) => state);
@@ -74,7 +74,7 @@ function ModalProfile() {
             {/* MODAL BODY */}
             <BodyModal
               handleChangeUpdateProfile={handleChangeUpdateProfile}
-              handleCloseModalProfile={handleCloseModalProfile}
+              setModalProfile={setModalProfile}
               handleFileChange={handleFileChange}
               handleUpdateImageProfile={handleUpdateImageProfile}
               handleUpdateProfile={handleUpdateProfile}
@@ -91,7 +91,7 @@ function ModalProfile() {
   );
 }
 
-function BodyModal({ handleFileChange, handleUpdateImageProfile, handleUpdateProfile, handleChangeUpdateProfile, handleCloseModalProfile, profileForm, previewUrl, isLoading, name, role }) {
+function BodyModal({ handleFileChange, handleUpdateImageProfile, handleUpdateProfile, handleChangeUpdateProfile, setModalProfile, profileForm, previewUrl, isLoading, name, role }) {
   return (
     <div className="modal-new__body">
       {/* IMAGE UPLOAD */}
@@ -118,14 +118,7 @@ function BodyModal({ handleFileChange, handleUpdateImageProfile, handleUpdatePro
         </div>
 
         {/* MODAL FOOTER */}
-        <div className="modal-new__footer">
-          <button type="submit" disabled={isLoading} className="submit-button__medium">
-            {isLoading ? 'Loading...' : 'Ubah'}
-          </button>
-          <button type="button" onClick={handleCloseModalProfile} className="cancel-button__medium" disabled={isLoading || name === null}>
-            Cancel
-          </button>
-        </div>
+        <FooterModal isLoading={isLoading} setOpenModal={setModalProfile} title={'Ubah'} name={name} />
       </form>
     </div>
   );
