@@ -3,7 +3,8 @@ import { useState } from 'react';
 import useGroupStore from '../features/groupStore';
 import useUserStore from '../features/userStore';
 import useActivityStore from '../features/activityStore';
-import { FooterModal, HeaderModal } from './';
+import { BodyModalForm, FooterModal, HeaderModal } from './';
+import { formFieldsGroup } from '../utils/constants';
 
 function ModalNewGroup() {
   const [newGroup, setNewGroup] = useState({ groupName: '' });
@@ -11,12 +12,8 @@ function ModalNewGroup() {
   const { id } = useUserStore((state) => state);
   const { id: idActivity } = useActivityStore((state) => state);
 
-  // ! CLOSE MODAL GROUP
-  const handleCloseNewModalGroup = () => {
-    setModalGroup(false);
-  };
   //! HANDLE FORM SUBMISSION
-  const handleCreateGroup = async (e) => {
+  const handleSubmitNewGroup = async (e) => {
     e.preventDefault();
     await createNewGroup({ idActivity, groupName: newGroup.groupName, id });
     // ! GET THE NEWEST GROUP
@@ -36,27 +33,11 @@ function ModalNewGroup() {
         <div className="modal-new__container">
           {/* MODAL HEADER */}
           <HeaderModal setOpenModal={setModalGroup} title={'Tambah Grup Baru'} isLoading={isLoading} />
+
           {/* MODAL BODY */}
-          <BodyModal handleChangeCreateGroup={handleChangeCreateGroup} handleCreateGroup={handleCreateGroup} newGroup={newGroup} isLoading={isLoading} setModalGroup={setModalGroup} />
+          <BodyModalForm formData={newGroup} formFields={formFieldsGroup} handleChange={handleChangeCreateGroup} handleSubmit={handleSubmitNewGroup} isLoading={isLoading} setOpenModal={setModalGroup} />
         </div>
       </div>
-    </div>
-  );
-}
-
-function BodyModal({ handleCreateGroup, newGroup, handleChangeCreateGroup, isLoading, setModalGroup }) {
-  return (
-    <div className="modal-new__body">
-      <form onSubmit={handleCreateGroup}>
-        {/* NAME Field */}
-        <div className="container-input">
-          <label htmlFor="groupName">Nama Grup</label>
-          <input type="text" id="groupName" name="groupName" value={newGroup.groupName} onChange={handleChangeCreateGroup} placeholder="Nama Grup" required />
-        </div>
-
-        {/* MODAL FOOTER */}
-        <FooterModal isLoading={isLoading} setOpenModal={setModalGroup} />
-      </form>
     </div>
   );
 }

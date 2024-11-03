@@ -15,6 +15,7 @@ export { default as ModalNewAgenda } from './ModalNewAgenda';
 
 // MODAL
 export { default as HeaderModal } from './NewModal/HeaderModal';
+export { default as BodyModalForm } from './NewModal/BodyModal';
 export { default as FooterModal } from './NewModal/FooterModal';
 
 export { default as Loading } from './Loading';

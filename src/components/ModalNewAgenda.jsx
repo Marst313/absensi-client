@@ -3,18 +3,19 @@ import { useParams } from 'react-router-dom';
 
 import useUserStore from '../features/userStore';
 import useAgendaStore from '../features/agendaStore';
-import { FooterModal, HeaderModal } from './';
+import { BodyModalForm, HeaderModal } from './';
+import { formFieldsAgenda } from '../utils/constants';
 
 function ModalNewAgenda() {
-  const [newAgendaForm, setNewAgendaForm] = useState({ name: '', deskripsi: '' });
+  const [newAgendaForm, setNewAgendaForm] = useState({ agendaName: '', agendaDescription: '' });
   const { modalAgenda, isLoading, setModalAgenda, createNewAgenda } = useAgendaStore((state) => state);
   const { id } = useUserStore((state) => state);
-  const { idGroup: groupId } = useParams();
+  const { id: grupId } = useParams();
 
-  const handleCreateNewAgenda = async (e) => {
+  const handleSubmitNewAgenda = async (e) => {
     e.preventDefault();
 
-    await createNewAgenda({ ...newAgendaForm, grupId: groupId, id });
+    await createNewAgenda({ ...newAgendaForm, grupId, id });
   };
 
   const handleChangeCreateAgenda = (e) => {
@@ -31,32 +32,9 @@ function ModalNewAgenda() {
           <HeaderModal setOpenModal={setModalAgenda} title={'Tambah Agenda Baru'} isLoading={isLoading} />
 
           {/* MODAL BODY */}
-          <BodyModal handleChangeCreateAgenda={handleChangeCreateAgenda} handleCreateNewAgenda={handleCreateNewAgenda} isLoading={isLoading} newAgendaForm={newAgendaForm} setModalAgenda={setModalAgenda} />
+          <BodyModalForm formData={newAgendaForm} formFields={formFieldsAgenda} handleChange={handleChangeCreateAgenda} handleSubmit={handleSubmitNewAgenda} isLoading={isLoading} setOpenModal={setModalAgenda} />
         </div>
       </div>
-    </div>
-  );
-}
-
-function BodyModal({ handleCreateNewAgenda, handleChangeCreateAgenda, newAgendaForm, isLoading, setModalAgenda }) {
-  return (
-    <div className="modal-new__body">
-      <form onSubmit={handleCreateNewAgenda}>
-        {/* NAME Field */}
-        <div className="container-input">
-          <label htmlFor="nama">Nama Agenda</label>
-          <input type="text" id="nama" name="name" value={newAgendaForm.name} onChange={handleChangeCreateAgenda} placeholder="Nama Agenda" required />
-        </div>
-
-        {/* DESKRIPSI FIELD */}
-        <div className="container-input">
-          <label htmlFor="deskripsi">Deskripsi Agenda</label>
-          <textarea id="deskripsi" name="deskripsi" value={newAgendaForm.deskripsi} onChange={handleChangeCreateAgenda} placeholder="Deskripsi Agenda" required />
-        </div>
-
-        {/* MODAL FOOTER */}
-        <FooterModal isLoading={isLoading} setOpenModal={setModalAgenda} />
-      </form>
     </div>
   );
 }

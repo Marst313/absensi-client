@@ -52,7 +52,6 @@ const activityStore = (set, get) => ({
 
       return true;
     } catch (error) {
-      console.log(error);
       get().handleApiError(error);
       set({ isLoading: false });
       return false;

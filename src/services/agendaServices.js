@@ -2,13 +2,11 @@ import customFetch from '../utils/axios';
 
 // ! Create a new agenda
 export const createNewAgenda = async (data) => {
-  const { id, name, grupId, deskripsi } = data;
-
   const response = await customFetch.post('/create/agenda', {
-    id,
-    name,
-    grupId,
-    deskripsi,
+    id: data.id,
+    name: data.agendaName,
+    grupId: data.grupId,
+    deskripsi: data.agendaDescription,
   });
 
   return response;

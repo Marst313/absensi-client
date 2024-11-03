@@ -1,11 +1,15 @@
-import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import useUserStore from '../features/userStore';
 import { useState } from 'react';
-import { HeaderModal, FooterModal } from './';
+import { HeaderModal, BodyModalForm } from './';
 
 function ModalUser() {
   const [newUserForm, setNewUserForm] = useState({ nim: '', password: '', role: 'MHS' });
   const { isLoading, modalUser, setModalUser, register, getAllUser } = useUserStore((state) => state);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
 
   // ! HANDLE CHANGE STATE
   const handleChangeCreateUser = (e) => {
@@ -20,10 +24,25 @@ function ModalUser() {
     await getAllUser();
   };
 
-  // ! CLOSE MODAL USER
-  const handleCloseModalUser = () => {
-    setModalUser(false);
-  };
+  const formFieldsUser = [
+    { label: 'NIM / NIP', id: 'nim', placeholder: '21.11.4110', required: true },
+    {
+      label: 'Password',
+      id: 'password',
+      type: showPassword ? 'text' : 'password',
+      placeholder: '********',
+      required: true,
+      isPassword: true,
+      toggleVisibilityHandler: togglePasswordVisibility,
+    },
+    {
+      label: 'Role',
+      id: 'role',
+      type: 'select',
+      options: ['MHS', 'DOSEN'],
+      required: true,
+    },
+  ];
 
   return (
     <div className={`${modalUser ? 'flex' : 'hidden'} modal-new`}>
@@ -34,51 +53,16 @@ function ModalUser() {
           <HeaderModal setOpenModal={setModalUser} title={'Tambah Mahasiswa Baru'} isLoading={isLoading} />
 
           {/* MODAL BODY */}
-          <BodyModal handleChangeCreateUser={handleChangeCreateUser} handleCreateNewUser={handleCreateNewUser} isLoading={isLoading} newUserForm={newUserForm} setModalUser={setModalUser} />
+          <BodyModalForm
+            formFields={formFieldsUser} //
+            handleSubmit={handleCreateNewUser}
+            handleChange={handleChangeCreateUser}
+            formData={newUserForm}
+            isLoading={isLoading}
+            setOpenModal={setModalUser}
+          />
         </div>
       </div>
-    </div>
-  );
-}
-
-function BodyModal({ handleCreateNewUser, handleChangeCreateUser, newUserForm, isLoading, setModalUser }) {
-  const [showPassword, setShowPassword] = useState(false);
-
-  // ! Toggle password vissible or not
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
-
-  return (
-    <div className="modal-new__body">
-      <form onSubmit={handleCreateNewUser}>
-        {/* NIM Field */}
-        <div className="container-input">
-          <label htmlFor="nim">NIM / NIP</label>
-          <input type="text" id="nim" name="nim" value={newUserForm.nim} onChange={handleChangeCreateUser} placeholder="21.11.4110" required />
-        </div>
-
-        {/* PASSWORD FIELD */}
-        <div className="container-input relative">
-          <label htmlFor="password">Password</label>
-          <input type={showPassword ? 'text' : 'password'} id="password" name="password" value={newUserForm.password} onChange={handleChangeCreateUser} placeholder="********" required />
-          <button type="button" onClick={togglePasswordVisibility} className="eye-button">
-            {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
-          </button>
-        </div>
-
-        {/* ROLE FIELD */}
-        <div className="container-input relative">
-          <label htmlFor="role">Role</label>
-          <select name="role" id="role" onChange={handleChangeCreateUser}>
-            <option value="MHS">Mahasiswa</option>
-            <option value="DOSEN">Dosen</option>
-          </select>
-        </div>
-
-        {/* Modal footer */}
-        <FooterModal isLoading={isLoading} setOpenModal={setModalUser} />
-      </form>
     </div>
   );
 }
