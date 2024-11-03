@@ -1,10 +1,14 @@
 export { default as Sidebar } from './Sidebar';
 
+// TABLE
 export { default as TableActivity } from './TableActivityAdmin';
 export { default as TableAgendaAdmin } from './TableAgendaAdmin';
 export { default as TableUsers } from './TableUsers';
 export { default as TableUsersGroup } from './TableUsersGroup';
 export { default as TableGroupAdmin } from './TableGroupAdmin';
+
+// TABLE COMPONENT
+export { default as HeaderSection } from './HeaderSection';
 
 export { default as ModalUser } from './ModalNewUser';
 export { default as ModalUsersGroup } from './ModalNewUsersToGroup';

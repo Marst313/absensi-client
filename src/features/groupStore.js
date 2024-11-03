@@ -85,8 +85,6 @@ const groupStore = (set, get) => ({
 
       return response.message === 'Berhasil ditemukan';
     } catch (error) {
-      console.log(error);
-
       if (error.status === 404) {
         toast.error(error?.response?.data?.message);
       } else {

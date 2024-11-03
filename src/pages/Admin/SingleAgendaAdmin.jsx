@@ -13,7 +13,7 @@ function SingleAgendaAdmin() {
   const navigate = useNavigate();
   const params = useParams();
   const { allAgenda, isLoading, getAllAgenda } = useAgendaStore((state) => state);
-  const { singleGroup, clearSingleGroup, setSingleGroup, getAllGroup } = useGroupStore((state) => state);
+  const { singleGroup, isLoading: loadingGroup, clearSingleGroup, setSingleGroup, getAllGroup } = useGroupStore((state) => state);
   const { id } = useUserStore((state) => state);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function SingleAgendaAdmin() {
     fetchData();
   }, [params, id]);
 
-  if (isLoading) return <LoadingSkeletonTable />;
+  if (isLoading || loadingGroup) return <LoadingSkeletonTable />;
 
   return (
     <div>

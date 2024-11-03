@@ -6,14 +6,14 @@ import { BsFileEarmarkBarGraph } from 'react-icons/bs';
 import { MdGroupAdd } from 'react-icons/md';
 
 function TableActivity({ setModalGroup }) {
-  const { allActivity } = useActivityStore((state) => state);
+  const { allActivity, isLoading } = useActivityStore((state) => state);
 
   if (allActivity.length === 0) {
-    return <h1 className="text-lg text-primary">Belum Menambahkan Kegiatan.</h1>;
+    return <h1 className="text-lg text-primary text-red-500">Belum Menambahkan Kegiatan.</h1>;
   }
 
   return (
-    <ul className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4">
+    <ul className="container-card">
       {allActivity?.map((activity) => (
         <li key={activity.id} className="flex flex-col justify-between w-full min-h-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-shadow relative">
           {/* Title */}

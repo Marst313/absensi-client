@@ -10,7 +10,7 @@ function TableAgendaAdmin({ data }) {
   }
 
   return (
-    <ul className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4">
+    <ul className="container-card">
       {data?.map((agenda) => {
         return (
           <li key={agenda?.id} className="flex flex-col justify-between w-full min-h-[150px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-shadow relative">

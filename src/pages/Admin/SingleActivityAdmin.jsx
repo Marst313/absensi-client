@@ -15,13 +15,13 @@ function SingleActivity() {
   const { id: idActivity } = useParams();
 
   const { allActivity, singleActivity, isLoading, getAllActivity, setSingleActivity } = useActivityStore((state) => state);
-  const { getAllGroup } = useGroupStore((state) => state);
+  const { isLoading: loadingGroup, getAllGroup } = useGroupStore((state) => state);
 
   useEffect(() => {
     if (userId) {
       getAllActivity(userId);
     }
-  }, [userId, getAllActivity]);
+  }, [userId]);
 
   useEffect(() => {
     if (idActivity) {
@@ -33,8 +33,8 @@ function SingleActivity() {
     }
   }, [allActivity, idActivity, setSingleActivity]);
 
-  if (isLoading) return <LoadingSkeleton />;
-  if (singleActivity === null) return <NotFound />;
+  if (loadingGroup) return <LoadingSkeleton />;
+  if (!singleActivity && !isLoading) return <NotFound />;
 
   return (
     <div>
@@ -66,8 +66,8 @@ function ContentSection({ activity }) {
         <h1 className="text-xl text-slate-400 font-light">
           Nama Kegiatan : <span className="font-semibold text-xl text-center capitalize text-slate-800">{activity?.nama}</span>
         </h1>
-        <p className="text-sm mt-3 lg:mt-0 flex items-center">
-          <BsFillCalendarDateFill /> : {isoToDate(activity?.waktumulai)} - {isoToDate(activity?.waktuselesai)}
+        <p className="text-sm mt-3 lg:mt-0 flex items-center gap-2">
+          <BsFillCalendarDateFill /> : <span> {isoToDate(activity?.waktumulai)}</span> | <span> {isoToDate(activity?.waktuselesai)}</span>
         </p>
         <div className={`w-3 h-3 rounded-full absolute top-0 right-0 ${activity?.visible ? 'bg-green-500' : 'bg-red-500'}`}></div>
       </div>

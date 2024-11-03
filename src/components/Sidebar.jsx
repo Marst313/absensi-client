@@ -36,7 +36,7 @@ function Sidebar({ openSidebar, setSidebar }) {
   }, [openSidebar, setSidebar]);
 
   return (
-    <aside ref={sidebarRef} className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-gray-100 shadow-lg ${openSidebar ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}>
+    <aside ref={sidebarRef} className={`fixed top-0 left-0 z-40 w-64 py-5 md:py-0 h-screen transition-transform bg-gray-100 shadow-lg ${openSidebar ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}>
       <div className="h-full px-3 flex flex-col py-4 overflow-y-auto">
         <ul className="space-y-2 font-medium">
           <h1 className="p-2 text-lg font-semibold">Dashboard Absensi</h1>
