@@ -24,20 +24,17 @@ function SingleActivity() {
   }, [userId, getAllActivity]);
 
   useEffect(() => {
-    if (allActivity && idActivity) {
-      const activity = allActivity.find((item) => item.id === idActivity);
-      setSingleActivity(activity || null);
-    }
-  }, [allActivity, idActivity, setSingleActivity]);
-
-  useEffect(() => {
     if (idActivity) {
       getAllGroup(idActivity);
     }
-  }, [idActivity, getAllGroup]);
+
+    if (allActivity && idActivity) {
+      setSingleActivity(idActivity, allActivity);
+    }
+  }, [allActivity, idActivity, setSingleActivity]);
 
   if (isLoading) return <LoadingSkeleton />;
-  if (!singleActivity) return <NotFound />;
+  if (singleActivity === null) return <NotFound />;
 
   return (
     <div>
@@ -67,15 +64,15 @@ function ContentSection({ activity }) {
       <hr />
       <div className="flex items-start flex-col self-start gap-3 relative">
         <h1 className="text-xl text-slate-400 font-light">
-          Nama Kegiatan : <span className="font-semibold text-xl text-center capitalize text-slate-800">{activity.nama}</span>
+          Nama Kegiatan : <span className="font-semibold text-xl text-center capitalize text-slate-800">{activity?.nama}</span>
         </h1>
         <p className="text-sm mt-3 lg:mt-0 flex items-center">
-          <BsFillCalendarDateFill /> : {isoToDate(activity.waktumulai)} - {isoToDate(activity.waktuselesai)}
+          <BsFillCalendarDateFill /> : {isoToDate(activity?.waktumulai)} - {isoToDate(activity?.waktuselesai)}
         </p>
-        <div className={`w-3 h-3 rounded-full absolute top-0 right-0 ${activity.visible ? 'bg-green-500' : 'bg-red-500'}`}></div>
+        <div className={`w-3 h-3 rounded-full absolute top-0 right-0 ${activity?.visible ? 'bg-green-500' : 'bg-red-500'}`}></div>
       </div>
       <div className="mt-5 lg:mt-10">
-        <p className="text-opacity-70">Deskripsi : {activity.deskripsi}</p>
+        <p className="text-opacity-70">Deskripsi : {activity?.deskripsi}</p>
       </div>
       <hr />
       <h1 className="font-semibold text-lg my-3 underline italic">List Grup Yang Mengikuti Kegiatan</h1>

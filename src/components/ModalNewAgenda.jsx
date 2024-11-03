@@ -1,21 +1,20 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 import useUserStore from '../features/userStore';
 import useAgendaStore from '../features/agendaStore';
 import { BodyModalForm, HeaderModal } from './';
 import { formFieldsAgenda } from '../utils/constants';
+import useGroupStore from '../features/groupStore';
 
 function ModalNewAgenda() {
   const [newAgendaForm, setNewAgendaForm] = useState({ agendaName: '', agendaDescription: '' });
   const { modalAgenda, isLoading, setModalAgenda, createNewAgenda } = useAgendaStore((state) => state);
   const { id } = useUserStore((state) => state);
-  const { id: grupId } = useParams();
-
+  const { id: idGroup } = useGroupStore((state) => state);
   const handleSubmitNewAgenda = async (e) => {
     e.preventDefault();
 
-    await createNewAgenda({ ...newAgendaForm, grupId, id });
+    await createNewAgenda({ ...newAgendaForm, grupId: idGroup, id });
   };
 
   const handleChangeCreateAgenda = (e) => {

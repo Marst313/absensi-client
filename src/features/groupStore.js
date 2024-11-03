@@ -32,9 +32,11 @@ const groupStore = (set, get) => ({
   // ! SET SINGLE GROUP
   setSingleGroup: (idGroup, allGroup) => {
     set({ isLoading: true });
-    const currentGroup = allGroup.find((group) => group.id === idGroup);
+    const currentGroup = allGroup?.find((group) => group.id === idGroup);
     set({ singleGroup: currentGroup, isLoading: false });
   },
+
+  setGroupId: (idGroup) => set({ id: idGroup }),
   clearSingleGroup: () => set({ singleGroup: {} }),
 
   /*!!!!!!!!!!!  API   !!!!!!!!!!!!!!! */
@@ -63,6 +65,7 @@ const groupStore = (set, get) => ({
       const { data: response } = await fetchGetAllGroup(idActivity);
       const sortedData = response.data.groups?.sort((a, b) => a.nama_grup.localeCompare(b.nama_grup));
       set({ modalActivity: false, isLoading: false, allGroup: sortedData });
+
       return sortedData;
     } catch (error) {
       get().handleApiError(error);

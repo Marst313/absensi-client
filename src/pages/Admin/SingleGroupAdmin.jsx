@@ -8,7 +8,7 @@ import { useSingleGroupData } from '../../hooks/useSingleGroupAdmin';
 
 function SingleGroup() {
   const { idGroup, idActivity } = useParams();
-  const { singleGroup, isLoading, loadingUser, setModalAgenda, setModalGroupUsers } = useSingleGroupData(idActivity, idGroup);
+  const { singleGroup, isLoading, loadingUser, setModalGroupUsers } = useSingleGroupData(idActivity, idGroup);
 
   if (isLoading || loadingUser) {
     return <LoadingSkeletonTable />;
@@ -46,7 +46,7 @@ function SingleGroup() {
           </h1>
 
           {/* Agenda Table */}
-          <Link to={`/agenda/${singleGroup?.id}`} className="open-button__medium">
+          <Link to={`/kegiatan/${idActivity}/agenda/${singleGroup?.id}`} className="open-button__medium">
             Lihat Agenda Grup
           </Link>
         </div>

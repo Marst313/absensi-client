@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/agenda/:idGroup',
+        path: 'kegiatan/:idActivity/agenda/:idGroup',
         element: (
           <ProtectedRoutes>
             <SingleAgendaAdmin />

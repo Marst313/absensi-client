@@ -1,26 +1,36 @@
 import { useEffect } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import useAgendaStore from '../../features/agendaStore';
 import useUserStore from '../../features/userStore';
+import useGroupStore from '../../features/groupStore';
+
 import TableAgendaAdmin from '../../components/TableAgendaAdmin';
 import LoadingSkeletonTable from '../../components/LoadingSkeletonTable';
-import useGroupStore from '../../features/groupStore';
 
 function SingleAgendaAdmin() {
   const navigate = useNavigate();
   const params = useParams();
   const { allAgenda, isLoading, getAllAgenda } = useAgendaStore((state) => state);
+  const { singleGroup, clearSingleGroup, setSingleGroup, getAllGroup } = useGroupStore((state) => state);
   const { id } = useUserStore((state) => state);
-  const { singleGroup } = useGroupStore((state) => state);
 
   useEffect(() => {
     const fetchData = async () => {
-      await getAllAgenda({ groupId: params.idGroup, userId: id });
+      clearSingleGroup();
+
+      const groups = await getAllGroup(params.idActivity);
+
+      setSingleGroup(params.idGroup, groups);
+
+      if (id) {
+        await getAllAgenda({ groupId: params.idGroup, userId: id });
+      }
     };
 
     fetchData();
-  }, []);
+  }, [params, id]);
 
   if (isLoading) return <LoadingSkeletonTable />;
 

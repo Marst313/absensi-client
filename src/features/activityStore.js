@@ -19,11 +19,13 @@ const activityStore = (set, get) => ({
   setModalActivity: (state) => set(() => ({ modalActivity: state })),
 
   // ! SET SINGLE ACTIVITY
-  setSingleActivity: (state) =>
-    set(() => ({
-      singleActivity: state,
-      id: state?.id,
-    })),
+  setSingleActivity: (idActivity, allActivity) => {
+    set({ isLoading: true });
+
+    const currentActivity = allActivity?.find((activity) => activity.id === idActivity);
+
+    set({ singleActivity: currentActivity, isLoading: false });
+  },
 
   // ! HANDLE ERROR ON API
   handleApiError: (error) => {
