@@ -40,14 +40,14 @@ function SingleActivity() {
     <div>
       <ModalNewAgenda />
 
-      <HeaderSection />
+      <HeaderSectionBack />
 
       <ContentSection activity={singleActivity} />
     </div>
   );
 }
 
-function HeaderSection() {
+function HeaderSectionBack() {
   return (
     <div className="w-full flex justify-between items-center gap-3">
       <Link to="/kegiatan" className="back-button__medium">
