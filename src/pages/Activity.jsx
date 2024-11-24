@@ -10,7 +10,7 @@ import useGroupStore from '../features/groupStore';
 function Activity() {
   const { isLoading, setModalActivity, getAllActivity } = useActivityStore((state) => state);
   const { id, role } = useUserStore((state) => state);
-  const { setModalGroup } = useGroupStore((state) => state);
+  const { setModalGroup, setGroupId } = useGroupStore((state) => state);
 
   useEffect(() => {
     if (id) {
@@ -35,7 +35,7 @@ function Activity() {
       {/* Header Activity */}
 
       {/* Activity Table */}
-      <TableActivity setModalGroup={setModalGroup} />
+      <TableActivity setModalGroup={setModalGroup} setGroupId={setGroupId} />
     </section>
   );
 }

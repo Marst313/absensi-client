@@ -16,6 +16,7 @@ const groupStore = (set, get) => ({
   // ! MODAL MANAGEMENT
   setModalGroup: (state) => set({ modalGroup: state }),
   setModalGroupUsers: (state) => set({ modalGroupUsers: state }),
+  setIdGroup: (state) => set({ id: state }),
 
   // ! HANDLE ERROR ON API
   handleApiError: (error) => {

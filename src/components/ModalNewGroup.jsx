@@ -8,9 +8,8 @@ import { formFieldsGroup } from '../utils/constants';
 
 function ModalNewGroup() {
   const [newGroup, setNewGroup] = useState({ groupName: '' });
-  const { modalGroup, isLoading, setModalGroup, createNewGroup, getAllGroup } = useGroupStore((state) => state);
+  const { modalGroup, isLoading, id: idActivity, setModalGroup, createNewGroup, getAllGroup } = useGroupStore((state) => state);
   const { id } = useUserStore((state) => state);
-  const { id: idActivity } = useActivityStore((state) => state);
 
   //! HANDLE FORM SUBMISSION
   const handleSubmitNewGroup = async (e) => {

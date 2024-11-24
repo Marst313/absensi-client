@@ -5,11 +5,15 @@ import { isoToDate } from '../utils/helper';
 import { BsFileEarmarkBarGraph } from 'react-icons/bs';
 import { MdGroupAdd } from 'react-icons/md';
 
-function TableActivity({ setModalGroup }) {
+function TableActivity({ setModalGroup, setGroupId }) {
   const { allActivity, isLoading } = useActivityStore((state) => state);
 
   if (allActivity.length === 0) {
     return <h1 className="text-lg text-primary text-red-500">Belum Menambahkan Kegiatan.</h1>;
+  }
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
   }
 
   return (
@@ -34,7 +38,14 @@ function TableActivity({ setModalGroup }) {
                 <FaLongArrowAltRight className="w-4 h-4 ms-2" />
               </Link>
 
-              <button onClick={() => setModalGroup(true)} type="button" className="add-button__small">
+              <button
+                onClick={() => {
+                  setModalGroup(true);
+                  setGroupId(activity.id);
+                }}
+                type="button"
+                className="add-button__small"
+              >
                 Tambah Grup
                 <MdGroupAdd className="w-4 h-4 ms-2" />
               </button>

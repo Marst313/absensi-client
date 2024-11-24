@@ -24,14 +24,16 @@ function SingleActivity() {
   }, [userId]);
 
   useEffect(() => {
-    if (idActivity) {
-      getAllGroup(idActivity);
-    }
+    if (!idActivity) return;
 
+    getAllGroup(idActivity);
+  }, [idActivity]);
+
+  useEffect(() => {
     if (allActivity && idActivity) {
       setSingleActivity(idActivity, allActivity);
     }
-  }, [allActivity, idActivity, setSingleActivity]);
+  }, [allActivity]);
 
   if (loadingGroup) return <LoadingSkeleton />;
   if (!singleActivity && !isLoading) return <NotFound />;
