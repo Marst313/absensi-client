@@ -14,11 +14,6 @@ function ModalUsersGroup() {
 
   const { idActivity, idGroup } = useParams();
 
-  // ! CLOSE MODAL GROUP
-  const handleCloseNewModalGroup = () => {
-    setModalGroupUsers(false);
-  };
-
   //! Function to handle form submission
   const handleAddUserGroup = async (e) => {
     e.preventDefault();
@@ -72,11 +67,9 @@ function BodyModal({ handleAddUserGroup, handleChangeListUsers, allUser, isLoadi
           <select name="listUsers" onChange={handleChangeListUsers}>
             <option value="">Pilih Mahasiswa</option>
             {allUser?.map((user) => {
-              if (user.name === '' || user.name === null) return;
-
               return (
                 <option key={user.id} value={user.id}>
-                  {user.name}
+                  {user.nim}
                 </option>
               );
             })}
