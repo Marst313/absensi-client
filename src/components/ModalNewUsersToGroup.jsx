@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
 
@@ -13,6 +13,9 @@ function ModalUsersGroup() {
   const { allUser } = useUserStore((state) => state);
 
   const { idActivity, idGroup } = useParams();
+
+  const [dataUser, setDataUser] = useState([]);
+  const [search, setSearch] = useState('');
 
   //! Function to handle form submission
   const handleAddUserGroup = async (e) => {
@@ -30,6 +33,27 @@ function ModalUsersGroup() {
     setNewUsers((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    const debounceTimeout = setTimeout(() => {
+      if (search.trim() === '') {
+        setDataUser(allUser);
+      } else {
+        const searchUser = allUser.filter((user) => user.nim.toLowerCase().includes(search.toLowerCase()));
+        setDataUser(searchUser);
+      }
+    }, 300);
+
+    return () => clearTimeout(debounceTimeout);
+  }, [search, allUser]);
+
+  useEffect(() => {
+    setDataUser(dataUser);
+  }, [allUser, dataUser]);
+
   return (
     <div className={`${modalGroupUsers ? 'flex' : 'hidden'} modal-new`}>
       <div>
@@ -39,14 +63,14 @@ function ModalUsersGroup() {
           <HeaderModal setOpenModal={setModalGroupUsers} title={'Tambahkan Mahasiswa Ke Grup'} isLoading={isLoading} />
 
           {/* MODAL BODY */}
-          <BodyModal allUser={allUser} handleAddUserGroup={handleAddUserGroup} handleChangeListUsers={handleChangeListUsers} isLoading={isLoading} setModalGroupUsers={setModalGroupUsers} />
+          <BodyModal allUser={dataUser} handleAddUserGroup={handleAddUserGroup} handleChangeListUsers={handleChangeListUsers} isLoading={isLoading} setModalGroupUsers={setModalGroupUsers} handleSearch={handleSearch} />
         </div>
       </div>
     </div>
   );
 }
 
-function BodyModal({ handleAddUserGroup, handleChangeListUsers, allUser, isLoading, setModalGroupUsers }) {
+function BodyModal({ handleAddUserGroup, handleChangeListUsers, allUser, isLoading, setModalGroupUsers, handleSearch }) {
   return (
     <div className="modal-new__body">
       {/* SEARCH Field */}
@@ -56,7 +80,7 @@ function BodyModal({ handleAddUserGroup, handleChangeListUsers, allUser, isLoadi
           <div className="container-search">
             <IoSearchOutline />
           </div>
-          <input type="search" className="input-search" placeholder="Search Mahasiswa" required />
+          <input type="search" className="input-search" placeholder="Search NIM" required onChange={handleSearch} />
         </div>
       </form>
 
