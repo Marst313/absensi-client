@@ -52,7 +52,7 @@ function SingleActivity() {
 function HeaderSectionBack() {
   return (
     <div className="w-full flex justify-between items-center gap-3">
-      <Link to={-1} className="back-button__medium">
+      <Link to={'/'} className="back-button__medium">
         <IoArrowBack />
         Kembali
       </Link>
