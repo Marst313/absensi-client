@@ -6,9 +6,9 @@ import { BsFileEarmarkBarGraph } from 'react-icons/bs';
 import { MdGroupAdd } from 'react-icons/md';
 
 function TableActivity({ setModalGroup, setGroupId }) {
-  const { allActivity, isLoading } = useActivityStore((state) => state);
+  const { searchResults, isLoading } = useActivityStore((state) => state);
 
-  if (allActivity.length === 0) {
+  if (searchResults.length === 0) {
     return <h1 className="text-lg text-primary text-red-500">Belum Menambahkan Kegiatan.</h1>;
   }
 
@@ -18,7 +18,7 @@ function TableActivity({ setModalGroup, setGroupId }) {
 
   return (
     <ul className="container-card">
-      {allActivity?.map((activity) => (
+      {searchResults?.map((activity) => (
         <li key={activity.id} className="flex flex-col justify-between w-full min-h-[250px] p-6 bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-shadow relative">
           {/* Title */}
 

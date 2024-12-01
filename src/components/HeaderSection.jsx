@@ -1,6 +1,6 @@
 import { IoIosSearch } from 'react-icons/io';
 
-function HeaderSection({ role, title, id, placeholder, setOpenModal, icon: Icon }) {
+function HeaderSection({ role, title, id, placeholder, setOpenModal, icon: Icon, handleSearch }) {
   return (
     <div className="header-activity">
       {/* Add Activity and Sort Options */}
@@ -13,7 +13,7 @@ function HeaderSection({ role, title, id, placeholder, setOpenModal, icon: Icon 
         )}
 
         {/* SELECT OPTION */}
-        <SelectOption />
+        {/* <SelectOption /> */}
       </div>
 
       {/* Search Activity */}
@@ -22,7 +22,7 @@ function HeaderSection({ role, title, id, placeholder, setOpenModal, icon: Icon 
         <div className="container-search">
           <IoIosSearch />
         </div>
-        <input type="text" id={id} placeholder={placeholder} className="input-search" />
+        <input type="text" id={id} onChange={handleSearch} placeholder={placeholder} className="input-search" />
       </div>
     </div>
   );

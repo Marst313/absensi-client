@@ -36,7 +36,7 @@ function Sidebar({ openSidebar, setSidebar }) {
   }, [openSidebar, setSidebar]);
 
   return (
-    <aside ref={sidebarRef} className={`fixed top-0 left-0 z-40 w-64 py-10 md:py-0 h-screen transition-transform bg-gray-100 shadow-lg ${openSidebar ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}>
+    <aside ref={sidebarRef} className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-gray-100 shadow-lg ${openSidebar ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}>
       <div className="h-full px-3 flex flex-col py-4 overflow-y-auto">
         <ul className="space-y-2 font-medium">
           <h1 className="p-2 text-lg font-semibold">Dashboard Absensi</h1>
@@ -57,7 +57,7 @@ function Sidebar({ openSidebar, setSidebar }) {
         </ul>
 
         {/* Tombol Log Out di bagian bawah */}
-        <div className="mt-auto">
+        <div className="mt-auto pb-8 lg:pb-0">
           <NavLink
             to="profil"
             className={({ isActive }) => `${isActive ? 'border-r-4 border-slate-800 bg-slate-200' : 'hover:bg-slate-200 hover:border-r-4 hover:border-slate-800 text-gray-500 hover:text-gray-900'} flex items-center p-2 group`}

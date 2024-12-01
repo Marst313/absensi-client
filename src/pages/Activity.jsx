@@ -6,11 +6,28 @@ import { TableActivity, ModalActivity, LoadingSkeleton, ModalNewGroup, HeaderSec
 import useActivityStore from '../features/activityStore';
 import useUserStore from '../features/userStore';
 import useGroupStore from '../features/groupStore';
+import Pagination from '../components/Pagination';
 
 function Activity() {
-  const { isLoading, setModalActivity, getAllActivity } = useActivityStore((state) => state);
+  const { isLoading, totalPage, pageSize, currentPage, setModalActivity, getAllActivity, searchActivity, setCurrentPage } = useActivityStore((state) => state);
   const { id, role } = useUserStore((state) => state);
   const { setModalGroup, setGroupId } = useGroupStore((state) => state);
+
+  const handleSearchActivity = (e) => {
+    searchActivity(e.target.value);
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPage) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
   useEffect(() => {
     if (id) {
@@ -31,11 +48,13 @@ function Activity() {
       <ModalNewGroup />
 
       {/* Header Activity */}
-      <HeaderSection id={'table-search-activity'} placeholder={'Search for Activity'} role={role} setOpenModal={setModalActivity} title={'Tambah Kegiatan Baru'} icon={MdLibraryAdd} />
+      <HeaderSection id={'table-search-activity'} placeholder={'Search for Activity'} role={role} setOpenModal={setModalActivity} handleSearch={handleSearchActivity} title={'Tambah Kegiatan Baru'} icon={MdLibraryAdd} />
       {/* Header Activity */}
 
       {/* Activity Table */}
       <TableActivity setModalGroup={setModalGroup} setGroupId={setGroupId} />
+
+      <Pagination totalPage={totalPage} showedPage={pageSize} currentPage={currentPage} onPrev={handlePrev} onNext={handleNext} />
     </section>
   );
 }

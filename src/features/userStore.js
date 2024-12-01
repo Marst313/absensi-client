@@ -20,11 +20,18 @@ const userStore = (set, get) => ({
   id: '',
   avatar: '',
   token: getLocalStorage('token'),
+
+  isCacheValid: false,
   isLogin: false,
   isLoading: false,
   modalUser: false,
   modalProfile: false,
 
+  currentPage: 1,
+  pageSize: 10,
+  totalPage: 1,
+
+  searchResults: [],
   Groups: [],
   allUser: [],
 
@@ -32,11 +39,36 @@ const userStore = (set, get) => ({
   setModalProfile: (state) => set(() => ({ modalProfile: state })),
   setModalUser: (state) => set(() => ({ modalUser: state })),
 
+  // ! SET CURRENT PAGE
+  setCurrentPage: (page) => {
+    const { allUser, pageSize } = get();
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+
+    set({
+      searchResults: allUser.slice(startIndex, endIndex),
+      currentPage: page,
+    });
+  },
+
   // ! SET USER DATA TO STATE
   setUserData: (response) => {
     const { token, email, isLogin, role, nim, id, avatar, name, Group = [] } = response.data;
 
-    set({ token, email, isLogin, role: response.data.role, nim, id, avatar, name, Groups: Group, isLoading: false });
+    set({ token, email, isLogin, role, nim, id, avatar, name, Groups: Group, isLoading: false });
+  },
+
+  // ! SEARCH USER
+  searchUser: (query) => {
+    const { allUser, pageSize } = get();
+
+    const filtered = allUser.filter((activity) => activity.nim.toLowerCase().includes(query.toLowerCase()));
+
+    set({
+      searchResults: filtered.slice(0, pageSize),
+      totalPage: Math.ceil(filtered.length / pageSize),
+      currentPage: 1,
+    });
   },
 
   // ! HANDLE ERROR ON API
@@ -100,7 +132,7 @@ const userStore = (set, get) => ({
 
   // ! REGISTER
   register: async (data) => {
-    set({ isLoading: true });
+    set({ isLoading: true, isCacheValid: false });
     try {
       const response = await registerService(data);
       toast.success(response.message);
@@ -115,14 +147,24 @@ const userStore = (set, get) => ({
 
   // ! GET ALL USER
   getAllUser: async () => {
+    const { allUser, isCacheValid, currentPage, pageSize } = get();
+
+    if (isCacheValid && allUser.length > 0) {
+      return;
+    }
+
     set({ isLoading: true });
+
     try {
+      const startIndex = (currentPage - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
+
       const response = await getAllUserService();
       const sortedData = response?.data?.sort((a, b) => {
         return a.nim.localeCompare(b.nim);
       });
 
-      set({ allUser: sortedData, isLoading: false });
+      set({ allUser: sortedData, searchResults: sortedData.slice(startIndex, endIndex), isLoading: false, isCacheValid: true, totalPage: Math.ceil(sortedData.length / pageSize) });
       return true;
     } catch (error) {
       get().handleApiError(error);

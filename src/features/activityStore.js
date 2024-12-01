@@ -10,13 +10,45 @@ const activityStore = (set, get) => ({
     waktumulai: '',
     waktuselesai: '',
   },
+  isCacheValid: false,
   modalActivity: false,
   isLoading: false,
+
+  currentPage: 1,
+  pageSize: 10,
+  totalPage: 1,
+
+  searchResults: [],
   allActivity: [],
   singleActivity: {},
 
   // ! SET MODAL CREATE NEW ACTIVITY
   setModalActivity: (state) => set(() => ({ modalActivity: state })),
+
+  // ! SET CURRENT PAGE
+  setCurrentPage: (page) => {
+    const { allActivity, pageSize } = get();
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+
+    set({
+      searchResults: allActivity.slice(startIndex, endIndex),
+      currentPage: page,
+    });
+  },
+
+  // ! SEARCH ACTIVITY
+  searchActivity: (query) => {
+    const { allActivity, pageSize } = get();
+
+    const filtered = allActivity.filter((activity) => activity.nama.toLowerCase().includes(query.toLowerCase()));
+
+    set({
+      searchResults: filtered.slice(0, pageSize),
+      totalPage: Math.ceil(filtered.length / pageSize),
+      currentPage: 1,
+    });
+  },
 
   // ! SET SINGLE ACTIVITY
   setSingleActivity: (idActivity, allActivity) => {
@@ -44,7 +76,7 @@ const activityStore = (set, get) => ({
 
   // ! CREATE NEW ACTIVITY
   createNewActivity: async (data) => {
-    set({ isLoading: true });
+    set({ isLoading: true, isCacheValid: false });
 
     try {
       const response = await createNewActivity(data);
@@ -62,22 +94,29 @@ const activityStore = (set, get) => ({
 
   // ! GET ALL ACTIVITY
   getAllActivity: async (id) => {
+    const { allActivity, isCacheValid, pageSize, currentPage } = get();
+
+    if (isCacheValid && allActivity.length > 0) {
+      return;
+    }
     set({ isLoading: true });
 
     try {
       const { data } = await getAllActivity(id);
 
-      const sortedData = data?.data?.sort((a, b) => {
-        if (a.nama.toLowerCase() < b.nama.toLowerCase()) {
-          return -1;
-        }
-        if (a.nama.toLowerCase() > b.nama.toLowerCase()) {
-          return 1;
-        }
-        return 0;
-      });
+      const startIndex = (currentPage - 1) * pageSize;
+      const endIndex = startIndex + pageSize;
 
-      set({ modalActivity: false, isLoading: false, allActivity: sortedData });
+      const sortedData = data?.data?.sort((a, b) => a.nama.localeCompare(b.nama));
+
+      set({
+        modalActivity: false,
+        isLoading: false,
+        isCacheValid: true,
+        allActivity: sortedData,
+        searchResults: sortedData.slice(startIndex, endIndex),
+        totalPage: Math.ceil(sortedData.length / pageSize),
+      });
     } catch (error) {
       get().handleApiError(error);
       set({ isLoading: false });

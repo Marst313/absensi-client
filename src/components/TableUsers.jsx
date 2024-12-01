@@ -1,14 +1,4 @@
 function TableUsers({ data, tableHeader }) {
-  // ! EDIT BUTTON USER
-  const handleEditUser = (id) => {
-    console.log(id);
-  };
-
-  // ! DELETE BUTTON USER
-  const handleDeleteUser = (id) => {
-    console.log(id);
-  };
-
   if (!data) {
     return <h1 className="not-found">Data mahasiswa tidak ditemukan</h1>;
   }
