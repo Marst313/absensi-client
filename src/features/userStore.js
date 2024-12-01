@@ -34,9 +34,9 @@ const userStore = (set, get) => ({
 
   // ! SET USER DATA TO STATE
   setUserData: (response) => {
-    const { token, email, isLogin, role, nim, id, avatar, name, Group = [] } = response?.data;
+    const { token, email, isLogin, role, nim, id, avatar, name, Group = [] } = response.data;
 
-    set({ token, email, isLogin, role, nim, id, avatar, name, Groups: Group, isLoading: false });
+    set({ token, email, isLogin, role: response.data.role, nim, id, avatar, name, Groups: Group, isLoading: false });
   },
 
   // ! HANDLE ERROR ON API

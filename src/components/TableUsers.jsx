@@ -1,4 +1,4 @@
-function TableUsers({ data, tableHeader, role }) {
+function TableUsers({ data, tableHeader }) {
   // ! EDIT BUTTON USER
   const handleEditUser = (id) => {
     console.log(id);
@@ -33,7 +33,7 @@ function TableUsers({ data, tableHeader, role }) {
               }
 
               return (
-                <th key={index} scope="col" className={` ${name.type === 'No' ? 'py-3' : 'px-6 py-3'}`}>
+                <th key={index} scope="col" className={` ${name.type === 'No' ? 'py-3' : 'px-6 py-3 whitespace-pre'}`}>
                   {name.type}
                 </th>
               );
@@ -63,24 +63,6 @@ function TableUsers({ data, tableHeader, role }) {
                 </th>
                 <td className="px-6 py-4">{user.nim || '-'}</td>
                 <td className="px-6 py-4">{user.role || '-'}</td>
-
-                {role === 'MHS' ? (
-                  <td className="px-6 py-4">
-                    <button type="button" disabled className="font-medium text-blue-600 hover:underline">
-                      -
-                    </button>
-                  </td>
-                ) : (
-                  <td className="px-3 py-4">
-                    <button type="button" onClick={() => handleEditUser(user.id)} className="font-medium text-blue-600 hover:underline">
-                      Edit
-                    </button>
-
-                    <button type="button" onClick={() => handleDeleteUser(user.id)} className="font-medium text-red-600 hover:underline ms-5">
-                      Delete
-                    </button>
-                  </td>
-                )}
               </tr>
             );
           })}

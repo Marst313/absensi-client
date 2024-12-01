@@ -126,7 +126,7 @@ function BodyModal({ handleFileChange, handleUpdateImageProfile, handleUpdatePro
 
 function ImageFormModal({ handleUpdateImageProfile, previewUrl, handleFileChange, isLoading }) {
   return (
-    <form className="flex flex-col md:flex-row items-center gap-5 pb-5" onSubmit={handleUpdateImageProfile}>
+    <form className="flex flex-col md:flex-row items-start lg:items-center gap-5 pb-5" onSubmit={handleUpdateImageProfile}>
       <img className="w-24 h-24 rounded-full shadow-lg" src={previewUrl} alt="Profile" />
       <input type="file" accept="image/*" onChange={handleFileChange} />
       <button type="submit" className="submit-button__medium" disabled={isLoading}>

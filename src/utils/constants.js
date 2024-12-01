@@ -1,15 +1,11 @@
 import { RiDashboardFill, RiUser3Fill, RiBarChart2Fill } from 'react-icons/ri';
 
 export const menuItemsAdmin = [
-  { name: 'Dashboard', icon: RiDashboardFill, to: '/' },
-  { name: 'Kegiatan', icon: RiBarChart2Fill, to: '/kegiatan' },
+  { name: 'Kegiatan', icon: RiBarChart2Fill, to: '/' },
   { name: 'Mahasiswa', icon: RiUser3Fill, to: '/mahasiswa' },
 ];
 
-export const menuItemsUser = [
-  { name: 'Dashboard', icon: RiDashboardFill, to: '/' },
-  { name: 'Group', icon: RiBarChart2Fill, to: '/grup' },
-];
+export const menuItemsUser = [{ name: 'Group', icon: RiBarChart2Fill, to: '/' }];
 
 export const tableHeaderUser = [
   {
@@ -31,10 +27,6 @@ export const tableHeaderUser = [
   {
     id: 5,
     type: 'Role',
-  },
-  {
-    id: 6,
-    type: 'Aksi',
   },
 ];
 

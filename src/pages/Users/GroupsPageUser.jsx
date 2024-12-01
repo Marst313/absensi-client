@@ -41,7 +41,7 @@ function GroupsPageUser() {
               {/* Bottom Section */}
               <div className="flex items-center justify-between mt-auto">
                 {/* Link */}
-                <Link to={`/grup/${grup.id}`} className="inline-flex items-center px-4 py-2 text-xs lg:text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none w-fit focus:ring-blue-300">
+                <Link to={`/grup/${grup.id}`} className="open-button__small">
                   Detail Kegiatan
                   <FaLongArrowAltRight className="w-4 h-4 ms-2" />
                 </Link>

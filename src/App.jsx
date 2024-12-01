@@ -20,24 +20,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/kegiatan',
-        element: (
-          <ProtectedRoutes>
-            <Activity />
-          </ProtectedRoutes>
-        ),
-      },
-      {
         path: '/kegiatan/:id',
         element: (
           <ProtectedRoutes>
             <SingleActivity />
           </ProtectedRoutes>
         ),
-      },
-      {
-        path: '/grup',
-        element: <GroupsPageUser />,
       },
       {
         path: '/grup/:idGroup',

@@ -1,18 +1,20 @@
-import { Loading } from '../components';
+import { LoadingSkeleton } from '../components';
 import useUserStore from '../features/userStore';
+import Activity from './Activity';
+import GroupsPageUser from './Users/GroupsPageUser';
 
 function Dashboard() {
-  const { isLoading } = useUserStore((state) => state);
+  const { isLoading, role } = useUserStore((state) => state);
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingSkeleton />;
   }
 
-  return (
-    <div>
-      <h1>Dashboard </h1>
-    </div>
-  );
+  if (role === 'DOSEN') {
+    return <Activity />;
+  }
+
+  return <GroupsPageUser />;
 }
 
 export default Dashboard;
