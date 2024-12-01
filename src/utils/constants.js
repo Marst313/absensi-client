@@ -10,22 +10,18 @@ export const menuItemsUser = [{ name: 'Group', icon: RiBarChart2Fill, to: '/' }]
 export const tableHeaderUser = [
   {
     id: 1,
-    type: 'Checkbox',
-  },
-  {
-    id: 2,
     type: 'No',
   },
   {
-    id: 3,
+    id: 2,
     type: 'Nama',
   },
   {
-    id: 4,
+    id: 3,
     type: 'NIM / NIP',
   },
   {
-    id: 5,
+    id: 4,
     type: 'Role',
   },
 ];
@@ -33,22 +29,18 @@ export const tableHeaderUser = [
 export const tableHeaderGroupUser = [
   {
     id: 1,
-    type: 'Checkbox',
-  },
-  {
-    id: 2,
     type: 'No',
   },
   {
-    id: 3,
+    id: 2,
     type: 'Nama',
   },
   {
-    id: 4,
+    id: 3,
     type: 'NIM / NIP',
   },
   {
-    id: 5,
+    id: 4,
     type: 'Aksi',
   },
 ];

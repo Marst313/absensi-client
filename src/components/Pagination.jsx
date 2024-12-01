@@ -7,11 +7,10 @@ function Pagination({ totalPage, showedPage, currentPage, onPrev, onNext }) {
 
   return (
     <div className="flex flex-col items-center mt-5">
-      {/* Help text */}
       <span className="text-sm text-gray-700">
-        Showing <span className="font-semibold text-gray-900">{currentPage}</span>
-        {` `} to <span className="font-semibold text-gray-900">{showedPage}</span>
-        {` `} of <span className="font-semibold text-gray-900">{totalPage}</span> Entries
+        Menampilkan <span className="font-semibold text-gray-900">{currentPage}</span>
+        {` `}/ <span className="font-semibold text-gray-900">{totalPage}</span> Total <span className="font-semibold text-gray-900">{showedPage}</span>
+        {` `}
       </span>
 
       <div className="inline-flex mt-2 xs:mt-0 gap-5">
