@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { RiMenu2Line } from 'react-icons/ri';
 import { IoMdNotifications } from 'react-icons/io';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { ModalProfile, Sidebar } from '../components';
 import useUserStore from '../features/userStore';
@@ -11,15 +11,20 @@ function HomeLayout() {
   const { token, name, email, modalProfile, isLoading, setModalProfile, validateToken } = useUserStore((store) => store);
 
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // ! Set Sidebar in Mobile View
   const setSideBar = (data) => setOpenSidebar(data);
 
   useEffect(() => {
     // ! Check if token exist and valid
+
+    const queryToken = searchParams.get('token');
+
     const checkToken = async () => {
-      if (token) {
-        const isValid = await validateToken(token);
+      if (queryToken || token) {
+        const isValid = await validateToken(queryToken || token);
+
         if (!isValid) {
           navigate('/login');
         }

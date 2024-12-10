@@ -88,6 +88,7 @@ const userStore = (set, get) => ({
     set({ isLoading: true });
     try {
       const response = await validateToken(jwt);
+      setLocalStorage('token', response?.data?.token);
 
       get().setUserData(response);
       return true;
