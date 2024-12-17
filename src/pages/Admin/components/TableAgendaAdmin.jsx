@@ -1,6 +1,16 @@
 import { MdLibraryBooks } from 'react-icons/md';
+import { Link, useNavigate } from 'react-router-dom';
+import useAgendaStore from '../../../features/agendaStore';
 
 function TableAgendaAdmin({ data }) {
+  const { setSingleAgenda } = useAgendaStore((state) => state);
+  const navigate = useNavigate();
+
+  const handleOnClick = (id, idAgenda) => {
+    setSingleAgenda(id);
+    navigate(`/agenda/${idAgenda}`);
+  };
+
   if (!data) {
     return <h1 className="not-found">Data agenda tidak ditemukan</h1>;
   }
@@ -28,6 +38,9 @@ function TableAgendaAdmin({ data }) {
             <div className="flex items-center justify-between mt-auto">
               {/* Link */}
               <button className={`open-button__small`}>Status</button>
+              <button onClick={() => handleOnClick(agenda?.idUser, agenda?.id)} className={`open-button__small`} disabled={!agenda.status_berkas}>
+                Detail
+              </button>
             </div>
           </li>
         );

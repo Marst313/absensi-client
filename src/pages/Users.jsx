@@ -26,6 +26,7 @@ function Users() {
     }
   };
 
+  //! INITIAL FETCH
   useEffect(() => {
     getAllUser();
   }, []);

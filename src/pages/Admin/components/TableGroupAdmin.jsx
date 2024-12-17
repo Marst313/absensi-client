@@ -3,8 +3,9 @@ import { FaLongArrowAltRight } from 'react-icons/fa';
 import { GrNewWindow } from 'react-icons/gr';
 import { MdGroups } from 'react-icons/md';
 
-import useGroupStore from '../features/groupStore';
-import useAgendaStore from '../features/agendaStore';
+import useGroupStore from '../../../features/groupStore';
+import useAgendaStore from '../../../features/agendaStore';
+import { useEffect } from 'react';
 
 function TableGroup() {
   const { allGroup, setGroupId } = useGroupStore((state) => state);
@@ -30,7 +31,7 @@ function TableGroup() {
               </h5>
 
               <button
-                className="add-button__small"
+                className="add-button__small "
                 onClick={() => {
                   setModalAgenda(true);
                   setGroupId(grup?.id);

@@ -1,6 +1,6 @@
-import { tableHeaderGroupUser } from '../utils/constants';
-import defaultProfile from '../assets/images/defaultProfile.jpg';
-import useGroupStore from '../features/groupStore';
+import { tableHeaderGroupUser } from '../../../utils/constants';
+import defaultProfile from '../../../assets/images/defaultProfile.jpg';
+import useGroupStore from '../../../features/groupStore';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 

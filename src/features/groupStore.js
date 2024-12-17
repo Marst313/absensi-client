@@ -10,6 +10,7 @@ const groupStore = (set, get) => ({
   isLoading: false,
 
   allGroup: [],
+  listMahasiswaCanAdd: [],
 
   singleGroup: {},
 
@@ -17,6 +18,15 @@ const groupStore = (set, get) => ({
   setModalGroup: (state) => set({ modalGroup: state }),
   setModalGroupUsers: (state) => set({ modalGroupUsers: state }),
   setIdGroup: (state) => set({ id: state }),
+  setListMahasiswaCanAdd: (allUser) => {
+    const { allGroup } = get();
+
+    const mahasiswaInGroups = allGroup.flatMap((group) => group.mahasiswa.map((m) => m.id));
+
+    const availableUsers = allUser.filter((user) => !mahasiswaInGroups.includes(user.id));
+
+    set({ listMahasiswaCanAdd: availableUsers });
+  },
 
   // ! HANDLE ERROR ON API
   handleApiError: (error) => {

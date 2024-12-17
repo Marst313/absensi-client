@@ -6,7 +6,7 @@ import useAgendaStore from '../../features/agendaStore';
 import useUserStore from '../../features/userStore';
 import useGroupStore from '../../features/groupStore';
 
-import TableAgendaAdmin from '../../components/TableAgendaAdmin';
+import TableAgendaAdmin from './components/TableAgendaAdmin';
 import LoadingSkeletonTable from '../../components/LoadingSkeletonTable';
 
 function SingleAgendaAdmin() {

@@ -1,12 +1,13 @@
 import { MdLibraryAdd } from 'react-icons/md';
 import { useEffect } from 'react';
 
-import { TableActivity, ModalActivity, LoadingSkeleton, ModalNewGroup, HeaderSection } from '../components';
+import { ModalActivity, LoadingSkeleton, ModalNewGroup, HeaderSection } from '../components';
 
 import useActivityStore from '../features/activityStore';
 import useUserStore from '../features/userStore';
 import useGroupStore from '../features/groupStore';
 import Pagination from '../components/Pagination';
+import TableActivity from './Admin/components/TableActivityAdmin';
 
 function Activity() {
   const { isLoading, totalPage, pageSize, currentPage, setModalActivity, getAllActivity, searchActivity, setCurrentPage } = useActivityStore((state) => state);

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Activity, Dashboard, Error, GroupsPageUser, HomeLayout, Login, Profile, ProtectedRoutes, SingleActivity, SingleAgendaAdmin, SingleGroupAdmin, SingleGroupUser, Users } from './pages';
+import { Dashboard, Error, HomeLayout, Login, Profile, ProtectedRoutes, SingleActivity, SingleAgendaAdmin, SingleAgendaDetail, SingleGroupAdmin, SingleGroupUser, Users } from './pages';
 
 const router = createBrowserRouter([
   {
@@ -44,6 +44,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoutes>
             <SingleAgendaAdmin />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: 'agenda/:idAgenda',
+        element: (
+          <ProtectedRoutes>
+            <SingleAgendaDetail />
           </ProtectedRoutes>
         ),
       },

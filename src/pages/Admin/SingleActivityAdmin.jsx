@@ -7,8 +7,10 @@ import useUserStore from '../../features/userStore';
 import { isoToDate } from '../../utils/helper';
 import useGroupStore from '../../features/groupStore';
 import useActivityStore from '../../features/activityStore';
-import { LoadingSkeleton, ModalNewAgenda, TableGroupAdmin } from '../../components';
+import { LoadingSkeleton, ModalNewAgenda } from '../../components';
 import { NotFound } from '../';
+
+import TableGroupAdmin from '../Admin/components/TableGroupAdmin';
 
 function SingleActivity() {
   const { id: userId } = useUserStore((state) => state);

@@ -13,6 +13,7 @@ export { default as NotFound } from './NotFound';
 export { default as SingleAgendaAdmin } from './Admin/SingleAgendaAdmin';
 export { default as SingleActivity } from './Admin/SingleActivityAdmin';
 export { default as SingleGroupAdmin } from './Admin/SingleGroupAdmin';
+export { default as SingleAgendaDetail } from './Admin/SingleAgendaDetail';
 
 // USERS
 export { default as SingleGroupUser } from './Users/SingleGroupUser';

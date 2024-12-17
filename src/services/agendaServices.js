@@ -20,3 +20,12 @@ export const getAllAgenda = async (data) => {
 
   return response;
 };
+
+// ! Get all agenda
+export const getSingleAgenda = async (data) => {
+  const { id, idUser } = data;
+
+  const response = await customFetch.post('/detail/form', { id, idUser });
+
+  return response;
+};

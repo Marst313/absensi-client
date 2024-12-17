@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { toast } from 'react-toastify';
-import { createNewAgenda as createNewAgendaApi, getAllAgenda as getAllAgendaApi } from '../services/agendaServices';
+import { createNewAgenda as createNewAgendaApi, getAllAgenda as getAllAgendaApi, getSingleAgenda } from '../services/agendaServices';
 
 const agendaStore = (set, get) => ({
   id: '',
@@ -10,14 +10,15 @@ const agendaStore = (set, get) => ({
   modalAgenda: false,
   isLoading: false,
 
+  singleAgenda: {},
+
   // ! SET MODAL CREATE NEW AGENDA
   setModalAgenda: (state) => set(() => ({ modalAgenda: state })),
 
   // ! SET SINGLE AGENDA
-  setSingleActivity: (state) =>
-    set(() => ({
-      id: state?.id,
-    })),
+  setSingleAgenda: (state) => {
+    set({ id: state });
+  },
 
   // ! HANDLE ERROR ON API
   handleApiError: (error) => {
@@ -60,6 +61,24 @@ const agendaStore = (set, get) => ({
     try {
       const response = await getAllAgendaApi(data);
       set({ isLoading: false, allAgenda: response.data.agendas });
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      get().handleApiError(error);
+      set({ isLoading: false });
+      return false;
+    }
+  },
+
+  // ! GET SINGLE AGENDA
+  getSingleAgenda: async (data) => {
+    set({ isLoading: true });
+
+    try {
+      const response = await getSingleAgenda(data);
+
+      set({ isLoading: false, singleAgenda: response.data.data });
 
       return true;
     } catch (error) {

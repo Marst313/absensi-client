@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import useActivityStore from '../features/activityStore';
+import useActivityStore from '../../../features/activityStore';
 import { FaLongArrowAltRight } from 'react-icons/fa';
-import { isoToDate } from '../utils/helper';
+import { isoToDate } from '../../../utils/helper';
 import { BsFileEarmarkBarGraph } from 'react-icons/bs';
 import { MdGroupAdd } from 'react-icons/md';
 

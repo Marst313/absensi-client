@@ -15,6 +15,6 @@ export const fetchGetAllGroup = async (idActivity) => {
 export const fetchConnectUserToGroup = async (data) => {
   return customFetch.post('/add/user', {
     id: data.idGroup,
-    mahasiswaId: [data.idUser],
+    mahasiswaId: [...data.idUser],
   });
 };
