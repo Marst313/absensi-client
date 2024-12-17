@@ -19,7 +19,7 @@ function SingleAgendaDetail() {
     initialFetch();
   }, []);
 
-  if (isLoading) {
+  if (isLoading && !singleAgenda) {
     return <LoadingSkeleton />;
   }
 
@@ -42,31 +42,32 @@ function HeaderSectionBack() {
     </div>
   );
 }
-
 function ContentSection({ agenda }) {
+  const gps = agenda?.gps; // Pastikan gps ada
+  const latitude = gps ? gps.split(',')[0] : '';
+  const longitude = gps ? gps.split(',')[1] : '';
+
   return (
     <>
       <hr />
       <div className="flex items-start flex-col self-start gap-3 relative">
         <h1 className="text-xl text-slate-400 font-light">
-          Detail Agenda : <span className="font-semibold text-xl text-center capitalize text-slate-800">{agenda?.detail}</span>
+          Detail Agenda : <span className="font-semibold text-xl text-center capitalize text-slate-800">{agenda?.detail || 'Detail tidak tersedia'}</span>
         </h1>
       </div>
       <div className="mt-5 lg:mt-10">
         <p className="text-opacity-70">Gambar :</p>
-        <img src={agenda?.gambar1 || agenda.gambar1_b64} loading="lazy" alt="Gambar agenda" className="w-52 max-h-60" />
+        <img src={agenda?.gambar1 || agenda?.gambar1_b64 || 'default_image.jpg'} loading="lazy" alt="Gambar agenda" className="w-52 max-h-60" />
       </div>
       <hr />
       {/* Map Section */}
       <div className="my-5">
-        <h2 className="text-lg font-semibold">Lokasi : </h2>
-        <iframe
-          title="Google Maps"
-          src={`https://www.google.com/maps?q=${agenda?.gps.split(',')[0]},${agenda?.gps.split(',')[1]}&hl=id&z=15&output=embed`}
-          style={{ width: '100%', height: '300px', border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-        ></iframe>
+        <h2 className="text-lg font-semibold">Lokasi :</h2>
+        {gps ? (
+          <iframe title="Google Maps" src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=id&z=15&output=embed`} style={{ width: '100%', height: '300px', border: 0 }} allowFullScreen="" loading="lazy"></iframe>
+        ) : (
+          <p className="text-red-500">Koordinat GPS tidak tersedia.</p>
+        )}
       </div>
     </>
   );
