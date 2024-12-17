@@ -7,7 +7,7 @@ import useUserStore from '../../features/userStore';
 import useGroupStore from '../../features/groupStore';
 
 import TableAgendaAdmin from './components/TableAgendaAdmin';
-import LoadingSkeletonTable from '../../components/LoadingSkeletonTable';
+import { LoadingSkeleton } from '../../components';
 
 function SingleAgendaAdmin() {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function SingleAgendaAdmin() {
     fetchData();
   }, [params, id]);
 
-  if (isLoading || loadingGroup) return <LoadingSkeletonTable />;
+  if (isLoading || loadingGroup) return <LoadingSkeleton />;
 
   return (
     <div>

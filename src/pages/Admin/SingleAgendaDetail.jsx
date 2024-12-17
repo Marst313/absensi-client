@@ -1,15 +1,15 @@
-import { BsFillCalendarDateFill } from 'react-icons/bs';
 import { IoArrowBack } from 'react-icons/io5';
-import { Link, useParams } from 'react-router-dom';
-import { isoToDate } from '../../utils/helper';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import useAgendaStore from '../../features/agendaStore';
-import { LoadingSkeleton } from '../../components';
+import { LoadingSkeletonTable } from '../../components';
 
 function SingleAgendaDetail() {
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('id');
   const { idAgenda } = useParams();
 
-  const { id, singleAgenda, isLoading, getSingleAgenda } = useAgendaStore((state) => state);
+  const { singleAgenda, isLoading, getSingleAgenda } = useAgendaStore((state) => state);
 
   const initialFetch = async () => {
     await getSingleAgenda({ id: idAgenda, idUser: id });
@@ -20,7 +20,7 @@ function SingleAgendaDetail() {
   }, []);
 
   if (isLoading) {
-    return <LoadingSkeleton />;
+    return <LoadingSkeletonTable />;
   }
 
   return (

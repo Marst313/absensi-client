@@ -3,12 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import useAgendaStore from '../../../features/agendaStore';
 
 function TableAgendaAdmin({ data }) {
-  const { setSingleAgenda } = useAgendaStore((state) => state);
   const navigate = useNavigate();
 
   const handleOnClick = (id, idAgenda) => {
-    setSingleAgenda(id);
-    navigate(`/agenda/${idAgenda}`);
+    navigate(`/agenda/${idAgenda}?id=${id}`);
   };
 
   if (!data) {

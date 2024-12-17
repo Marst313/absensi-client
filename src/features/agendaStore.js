@@ -15,11 +15,6 @@ const agendaStore = (set, get) => ({
   // ! SET MODAL CREATE NEW AGENDA
   setModalAgenda: (state) => set(() => ({ modalAgenda: state })),
 
-  // ! SET SINGLE AGENDA
-  setSingleAgenda: (state) => {
-    set({ id: state });
-  },
-
   // ! HANDLE ERROR ON API
   handleApiError: (error) => {
     const status = error.response?.status;
