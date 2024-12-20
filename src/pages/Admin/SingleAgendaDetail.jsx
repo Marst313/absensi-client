@@ -91,9 +91,9 @@ function ContentSection({ agenda }) {
         {/* PROFILE */}
       </div>
       <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
-      <div className="mt-5 flex flex-col gap-5 lg:flex-row items-start text-start justify-start  ">
+      <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-start lg:text-start justify-center items-center lg:justify-start text-center  ">
         {/* Gambar Section */}
-        <div className="flex  gap-3">
+        <div className="flex  gap-3 flex-col lg:flex-row">
           <h2 className="text-lg font-semibold">Gambar :</h2>
           <div className="flex gap-5 flex-col lg:flex-row">
             {images.map((img, index) => (
@@ -113,10 +113,10 @@ function ContentSection({ agenda }) {
         </div>
 
         {/* Map Section */}
-        <div className="flex gap-5 mb-20">
+        <div className="flex gap-5 mb-20  border border-black/30 shadow-md flex-col lg:flex-row ">
           <h2 className="text-lg font-semibold">Lokasi :</h2>
           {gps ? (
-            <iframe className="h-96 w-96" title="Google Maps" src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=id&z=15&output=embed`} allowFullScreen="" loading="lazy"></iframe>
+            <iframe className="h-96" title="Google Maps" src={`https://www.google.com/maps?q=${latitude},${longitude}&hl=id&z=15&output=embed`} allowFullScreen="" loading="lazy"></iframe>
           ) : (
             <p className="text-red-500">Koordinat GPS tidak tersedia.</p>
           )}
@@ -127,7 +127,7 @@ function ContentSection({ agenda }) {
       {previewImage && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50" onClick={closePreview}>
           <button
-            className="absolute top-1/2 left-20 bg-white/30 rounded-full hover:scale-105 text-primary text-3xl font-bold"
+            className="absolute top-1/2 left-10 lg:left-20 bg-white/30 rounded-full hover:scale-105 text-primary text-3xl font-bold"
             onClick={(e) => {
               e.stopPropagation();
               handlePrev();
@@ -146,7 +146,7 @@ function ContentSection({ agenda }) {
           <img
             src={images[currentIndex]}
             alt="Preview"
-            className={`max-w-full max-h-[90%] mx-4 mb-4 ${isImageLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+            className={`max-w-sm max-h-[60%] lg:max-h-[90%] mx-4 mb-4 ${isImageLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
             onLoad={() => setIsImageLoading(false)} // Gambar selesai dimuat
             onClick={(e) => e.stopPropagation()} // Mencegah close saat klik gambar
           />
@@ -161,7 +161,7 @@ function ContentSection({ agenda }) {
             &times;
           </button>
           <button
-            className="absolute top-1/2 right-20 bg-white/30 rounded-full hover:scale-105 text-primary text-3xl font-bold"
+            className="absolute top-1/2 right-10 lg:right-20 bg-white/30 rounded-full hover:scale-105 text-primary text-3xl font-bold"
             onClick={(e) => {
               e.stopPropagation();
               handleNext();
