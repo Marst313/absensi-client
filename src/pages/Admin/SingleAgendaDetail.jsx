@@ -51,7 +51,6 @@ function ContentSection({ agenda }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState(false);
 
-  // Array gambar
   const images = [agenda?.gambar1 || agenda?.gambar1_b64, agenda?.gambar2 || agenda?.gambar2_b64].filter(Boolean);
 
   const closePreview = () => {
@@ -75,12 +74,24 @@ function ContentSection({ agenda }) {
         <h1 className="text-xl text-slate-400 font-light">
           Detail Agenda : <span className="font-semibold text-xl text-center capitalize text-slate-800">{agenda?.detail || 'Detail tidak tersedia'}</span>
         </h1>
+
+        {/* PROFILE */}
+        <div className="flex gap-5 items-center">
+          <img className="w-10 h-10 rounded-full" src={agenda.mahasiswa.avatar} alt="Rounded avatar" />
+
+          <div>
+            <h1>Nama : {agenda.mahasiswa.name}</h1>
+            <h1>NIM : {agenda.mahasiswa.nim}</h1>
+          </div>
+        </div>
+        {/* PROFILE */}
       </div>
+      <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
       <div className="mt-5 flex flex-col gap-5 lg:flex-row items-start text-start justify-start  ">
         {/* Gambar Section */}
         <div className="flex  gap-3">
           <h2 className="text-lg font-semibold">Gambar :</h2>
-          <div className="flex gap-5">
+          <div className="flex gap-5 flex-col lg:flex-row">
             {images.map((img, index) => (
               <img
                 key={index}
