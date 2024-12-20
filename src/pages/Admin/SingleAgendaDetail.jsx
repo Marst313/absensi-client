@@ -2,7 +2,7 @@ import { IoArrowBack, IoArrowForward } from 'react-icons/io5';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useAgendaStore from '../../features/agendaStore';
-import { LoadingSkeletonTable } from '../../components';
+import { LoadingSkeleton, LoadingSkeletonTable } from '../../components';
 
 function SingleAgendaDetail() {
   const [searchParams] = useSearchParams();
@@ -66,6 +66,10 @@ function ContentSection({ agenda }) {
     setIsImageLoading(true);
     setCurrentIndex((prev) => (prev === 1 ? 0 : 1));
   };
+
+  if (!agenda) {
+    <LoadingSkeleton />;
+  }
 
   return (
     <>
