@@ -77,11 +77,11 @@ function ContentSection({ agenda }) {
 
         {/* PROFILE */}
         <div className="flex gap-5 items-center">
-          <img className="w-10 h-10 rounded-full" src={agenda.mahasiswa.avatar} alt="Rounded avatar" />
+          <img className="w-10 h-10 rounded-full" src={agenda?.mahasiswa?.avatar} alt="Rounded avatar" />
 
           <div>
-            <h1>Nama : {agenda.mahasiswa.name}</h1>
-            <h1>NIM : {agenda.mahasiswa.nim}</h1>
+            <h1>Nama : {agenda?.mahasiswa?.name}</h1>
+            <h1>NIM : {agenda?.mahasiswa?.nim}</h1>
           </div>
         </div>
         {/* PROFILE */}
